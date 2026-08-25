@@ -5,43 +5,43 @@ description: "Guia completo sobre geração de números aleatórios e truncament
 
 # Sorteios Numéricos (`aleatorio()`, `trunca()`)
 
-Em muitas situações computacionais, precisamos que o próprio algoritmo gere valores sem a intervenção direta do usuário através do teclado (por exemplo, para testes automatizados ou simulações) [cite: 2]. Para isso, a linguagem Zezinhol disponibiliza duas funções fundamentais: `aleatorio()` e `trunca()` [cite: 2].
+Em muitas situações computacionais, precisamos que o próprio algoritmo gere valores sem a intervenção direta do usuário através do teclado (por exemplo, para testes automatizados ou simulações). Para isso, a linguagem Zezinhol disponibiliza duas funções fundamentais: `aleatorio()` e `trunca()`.
 
 ---
 
 ## 1. Funções Primitivas de Base
 
 ### `aleatorio()`
-* **O que faz:** Função que retorna um número real sorteado uniformemente no intervalo fechado $[0; 1]$ [cite: 2].
+* **O que faz:** Função que retorna um número real sorteado uniformemente no intervalo fechado $[0; 1]$.
 * **Comportamento estatístico:** Garante chances iguais de distribuição dentro da faixa unitária.
 
 ### `trunca(x)` (ou `trunca()`)
-* **O que faz:** Recebe um número real por parâmetro e devolve estritamente a sua parte inteira, mapeando o resultado como um tipo inteiro [cite: 2].
+* **O que faz:** Recebe um número real por parâmetro e devolve estritamente a sua parte inteira, mapeando o resultado como um tipo inteiro.
 * **Objetivo matemático:** Remove a sobra decimal flutuante sem realizar arredondamento, isolando apenas a unidade inteira [cite: 1, 2].
 
 ---
 
 ## 2. Fórmulas de Mapeamento Estatístico
 
-A partir do comportamento estatístico uniforme dessas funções primitivas, deduzimos as expressões matemáticas necessárias para mapear os sorteios dentro de limites customizados $[a; b]$ [cite: 2].
+A partir do comportamento estatístico uniforme dessas funções primitivas, deduzimos as expressões matemáticas necessárias para mapear os sorteios dentro de limites customizados $[a; b]$.
 
 ### 2.1 Sorteio de Números Reais entre $a$ e $b$
-Para espalhar uniformemente um valor real contínuo no intervalo desejado [cite: 2]:
+Para espalhar uniformemente um valor real contínuo no intervalo desejado:
 
 ```zezinhol
 x <- aleatorio() * (b - a) + a
 ```
 
 ### 2.2 Sorteio de Números Inteiros entre $a$ e $b$
-Para garantir que o número sorteado caia exatamente sobre um valor discreto inteiro, com chances iguais para todos os elementos do intervalo [cite: 2]:
+Para garantir que o número sorteado caia exatamente sobre um valor discreto inteiro, com chances iguais para todos os elementos do intervalo:
 
 ```zezinhol
 x <- trunca(aleatorio() * (b - a + 1)) mod (b - a + 1) + a
 ```
-*(Também expresso equivalentemente como: `x <- aleatorio() * (b - a + 1)`, seguido de `x <- trunca(x) mod (b - a + 1)` e `x <- x + a`)* [cite: 2].
+*(Também expresso equivalentemente como: `x <- aleatorio() * (b - a + 1)`, seguido de `x <- trunca(x) mod (b - a + 1)` e `x <- x + a`)*.
 
 ### 2.3 Sorteio de Números Reais com Quantidade Fixa ($k$) de Casas Decimais entre $a$ e $b$
-Caso precisemos simular valores monetários ou de medição precisa com exatamente $k$ casas decimais, utilizamos a seguinte fórmula [cite: 2]:
+Caso precisemos simular valores monetários ou de medição precisa com exatamente $k$ casas decimais, utilizamos a seguinte fórmula:
 
 ```zezinhol
 x <- trunca(((b - a) * 10^k + 1) * aleatorio()) mod trunca((b - a) * 10^k + 1) / 10^k + a
@@ -51,31 +51,30 @@ x <- trunca(((b - a) * 10^k + 1) * aleatorio()) mod trunca((b - a) * 10^k + 1) /
 
 ## 3. Desmistificando a Lógica (Passo a Passo)
 
-À primeira vista, a fórmula de casas decimais fixas parece complexa, mas a sua intuição intermediária é simples [cite: 2]:
-1. **Multiplicação pela escala:** Multiplicamos a amplitude $(b - a)$ por $10^k$ para transformar temporariamente as casas decimais que queremos sortear em unidades inteiras (por exemplo, transformar o intervalo real $1.25$ no número inteiro $125$) [cite: 2].
-2. **Truncamento (`trunca`):** Remove-se a sobra decimal flutuante para isolar o número estritamente inteiro [cite: 2].
-3. **Resto da Divisão (`mod`):** Garante com segurança matemática que o valor inteiro gerado esteja cravado dentro do limite discreto correto [cite: 2].
-4. **Divisão por $10^k$:** A vírgula é arrastada de volta para a esquerda, devolvendo as casas decimais exatas [cite: 2].
-5. **Deslocamento Final ($+a$):** Soma-se o limite inicial $a$ para empurrar o intervalo (que começava em zero) para o ponto de partida correto [cite: 2].
+À primeira vista, a fórmula de casas decimais fixas parece complexa, mas a sua intuição intermediária é simples:
+1. **Multiplicação pela escala:** Multiplicamos a amplitude $(b - a)$ por $10^k$ para transformar temporariamente as casas decimais que queremos sortear em unidades inteiras (por exemplo, transformar o intervalo real $1.25$ no número inteiro $125$).
+2. **Truncamento (`trunca`):** Remove-se a sobra decimal flutuante para isolar o número estritamente inteiro.
+3. **Resto da Divisão (`mod`):** Garante com segurança matemática que o valor inteiro gerado esteja cravado dentro do limite discreto correto.
+4. **Divisão por $10^k$:** A vírgula é arrastada de volta para a esquerda, devolvendo as casas decimais exatas.
+5. **Deslocamento Final ($+a$):** Soma-se o limite inicial $a$ para empurrar o intervalo (que começava em zero) para o ponto de partida correto.
 
 ### Exemplo Prático Detalhado:
-Imagine que queremos sortear um número real entre $a = 1$ e $b = 4$ com exatamente $k = 2$ casas decimais [cite: 2]. Substituindo os limites, a amplitude ampliada se torna: $(4 - 1) 	imes 10^2 + 1 = 3 	imes 100 + 1 = 301$ [cite: 2].
+Imagine que queremos sortear um número real entre $a = 1$ e $b = 4$ com exatamente $k = 2$ casas decimais. Substituindo os limites, a amplitude ampliada se torna: $(4 - 1) 	imes 10^2 + 1 = 3 	imes 100 + 1 = 301$.
 
-Se a função `aleatorio()` retornar internamente o valor real `0.74259...`, acompanhe a linha de produção matemática que o algoritmo executa passo a passo [cite: 2]:
-1. **Multiplicação pela escala:** $301 	imes 0.74259... = 223.51959...$ [cite: 2]
-2. **Truncamento (`trunca`):** Isola-se o inteiro $
-ightarrow 223$ [cite: 2]
-3. **Resto da Divisão (`mod 301`):** $223 	ext{ mod } 301 = 223$ [cite: 2]
-4. **Divisão por $10^k$:** $223 / 100 = 2.23$ [cite: 2]
-5. **Deslocamento Final ($+1$):** $2.23 + 1 = 3.23$ (número sorteado final) [cite: 2]
-
+Se a função `aleatorio()` retornar internamente o valor real `0.74259...`, acompanhe a linha de produção matemática que o algoritmo executa passo a passo:
+1. **Multiplicação pela escala:** $301 \times 0.74259... = 223.51959...$
+2. **Truncamento (`trunca`):** Isola-se o inteiro $\rightarrow 223$
+3. **Resto da Divisão (`mod 301`):** $223 \bmod 301 = 223$
+4. **Divisão por $10^k$:** $223 / 100 = 2.23$
+5. **Deslocamento Final (`+1`):** $2.23 + 1 = 3.23$ (número sorteado final)
 ---
 
 ## 4. Exemplo Completo em Algoritmo
 
-Abaixo, um exemplo prático unificando registros, preenchimento dinâmico com sorteio formatado com $2$ casas decimais e ordenação [cite: 2]:
+Abaixo, um exemplo prático unificando registros, preenchimento dinâmico com sorteio formatado com $2$ casas decimais e ordenação:
 
-```zezinhol
+```
+zezinhol
 algoritmo SistemaSorteioEstudantes
 const
   MAX = 40
@@ -117,3 +116,4 @@ início
     escreva("Aluno: ", turma[i].nome, " - Numero Sorteado: ", turma[i].numero)
   fim para
 fim algoritmo
+```
