@@ -1,0 +1,99 @@
+---
+title: "Entrada e Saída (I/O)"
+description: "Comandos de leitura e escrita de dados na linguagem Zezinhol."
+---
+
+# Entrada e Saída de Dados (I/O)
+
+A comunicação entre o usuário e o programa é uma das partes mais fundamentais da construção de algoritmos. Na linguagem Zezinhol, a interação é feita através de dois comandos principais e diretos: `leia()` para entrada (Input) e `escreva()` para saída (Output).
+
+---
+
+## 1. Entrada de Dados: `leia()`
+
+O comando `leia()` é utilizado para pausar a execução do algoritmo e aguardar que o usuário digite algum dado pelo teclado. O valor digitado será automaticamente armazenado na variável informada dentro dos parênteses.
+
+### Regras de Uso:
+* A variável utilizada no comando `leia()` já deve ter sido declarada na seção `var`.
+* O tipo de dado digitado pelo usuário deve ser compatível com o tipo da variável que irá recebê-lo.
+
+### Exemplo Simples:
+```zezinhol
+algoritmo lerIdade
+var
+  idade: inteiro
+início
+  leia(idade)
+fim algoritmo
+```
+Neste exemplo, o valor numérico que o usuário digitar será guardado na variável `idade`.
+
+### Lendo Múltiplas Variáveis:
+A linguagem Zezinhol permite capturar múltiplos dados sequenciais em um único comando, separando as variáveis por vírgula.
+```zezinhol
+leia(valor1, valor2, valor3)
+```
+
+---
+
+## 2. Saída de Dados: `escreva()`
+
+O comando `escreva()` é a voz do seu algoritmo. Ele é utilizado para exibir mensagens de texto, resultados de cálculos ou os valores armazenados nas variáveis diretamente na tela (console).
+
+### Regras de Uso:
+* Mensagens de texto fixas devem sempre estar entre aspas duplas (`" "`).
+* Variáveis são escritas diretamente pelo seu nome, sem aspas.
+* Você pode juntar (concatenar) textos e variáveis no mesmo comando separando-os por vírgula.
+
+### Exemplo 1: Exibindo apenas uma variável
+```zezinhol
+x <- 5
+escreva(x)
+```
+**Resultado na tela:**
+`5`
+
+### Exemplo 2: Mesclando texto e variável
+```zezinhol
+x <- 5
+escreva("O valor é ", x)
+```
+**Resultado na tela:**
+`O valor é 5`
+
+### Exemplo 3: Saída Complexa
+É possível compor frases completas intercalando diversas strings e variáveis no mesmo `escreva()`.
+```zezinhol
+altura <- 1.73
+escreva("Eu tenho ", altura, "m de altura")
+```
+**Resultado na tela:**
+`Eu tenho 1.73m de altura`
+
+---
+
+## Exemplo Completo de I/O
+
+Veja como os comandos de entrada e saída trabalham juntos em um algoritmo real:
+
+```zezinhol
+algoritmo saudacao
+var
+  nome: string
+  anoNascimento, idade: inteiro
+início
+  // Saída instruindo o usuário
+  escreva("Digite seu nome: ")
+  // Entrada armazenando o nome
+  leia(nome)
+  
+  escreva("Digite seu ano de nascimento: ")
+  leia(anoNascimento)
+  
+  // Cálculo
+  idade <- 2026 - anoNascimento
+  
+  // Saída compondo o resultado final
+  escreva("Olá ", nome, "! Você tem ou fará ", idade, " anos.")
+fim algoritmo
+```

@@ -1,0 +1,42 @@
+---
+title: "Criação e Aplicação de Máscaras"
+description: "Técnicas para ligar e desligar bits específicos utilizando máscaras na linguagem Zezinhol."
+---
+
+# Criação e Aplicação de Máscaras
+
+A manipulação de bits individuais significa alterar posições específicas dentro da representação binária de um número. Para isso, utiliza-se o conceito de máscaras de bits.
+
+Uma máscara é um número utilizado para alterar bits específicos de outro número de maneira controlada. A manipulação de bits por meio de máscaras está diretamente relacionada ao comportamento dos operadores lógicos aplicados bit a bit.
+
+As duas operações principais utilizando máscaras consistem em:
+* Ligar um bit: garantir que ele seja 1
+* Desligar um bit: garantir que ele seja 0
+
+---
+
+## 1. Ligar Bits
+
+Para ligar um ou mais bits específicos, utiliza-se o operador `bit ou` juntamente com uma máscara. Na construção desta máscara, os bits que se deseja ligar devem ter o valor 1, e os demais devem ter o valor 0.
+
+### Exemplo: Ligar os bits 6 e 7
+n = 10 = 00001010
+máscara = 96 = 01100000
+n bit ou máscara = 01101010 = 106
+
+---
+
+## 2. Desligar Bits
+
+Para desligar um ou mais bits, utiliza-se o operador `bit e` com uma máscara apropriada. Na construção desta máscara, os bits que se deseja desligar devem ter o valor 0, e todos os demais bits que devem ser preservados precisam ter o valor 1.
+
+### Exemplo: Desligar os bits 3 e 4
+n = 30 = 00011110
+máscara = 243 = 11110011
+n bit e máscara = 00010010 = 18
+
+---
+
+## Considerações Finais
+
+O entendimento das propriedades de como cada operador atua sobre os bits envolvidos permite construir máscaras adequadas para cada situação. Ao analisar os resultados das diferentes combinações de valores (0 e 1), é possível alterar bits específicos de maneira totalmente controlada.

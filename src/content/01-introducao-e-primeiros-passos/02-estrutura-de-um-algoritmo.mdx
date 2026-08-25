@@ -1,0 +1,124 @@
+---
+title: "Estrutura de um Algoritmo"
+description: "Guia completo sobre a estrutura base e organização de blocos na linguagem Zezinhol."
+---
+
+# Estrutura de um Algoritmo
+
+Todo algoritmo escrito na linguagem Zezinhol possui uma estrutura organizacional bem definida e dividida em blocos. A fundação de qualquer programa nesta linguagem é composta por três partes obrigatórias: **Cabeçalho**, **Declaração de Variáveis** e o **Corpo do Algoritmo**. 
+
+Adicionalmente, projetos mais avançados podem contar com seções opcionais para a declaração de constantes e tipos estruturados.
+
+---
+
+## 1. Cabeçalho
+
+O cabeçalho é a linha inaugural do seu código. Ele tem a função de batizar o programa, permitindo sua identificação.
+Para defini-lo, utiliza-se a palavra reservada `algoritmo` seguida de um nome escolhido pelo programador (sem espaços).
+
+```zezinhol
+algoritmo calculoDeMedia
+```
+
+---
+
+## 2. Seções Opcionais (Constantes e Tipos)
+
+Antes de declarar variáveis, a linguagem permite a organização de dados estruturais que preparam o terreno para o algoritmo:
+
+* **Constantes (`const`):** Bloco utilizado para definir valores fixos que não sofrerão nenhuma alteração durante toda a execução do programa (ex: valor de PI, limites máximos).
+* **Tipos (`tipos`):** Bloco utilizado para criar registros (estruturas heterogêneas) que agrupam múltiplos atributos sob um mesmo nome.
+
+```zezinhol
+const
+  LIMITE_FALTAS = 15
+  MENSAGEM_ERRO = "Acesso negado"
+
+tipos
+  Aluno registro
+    nome: string
+    nota: real
+  fim registro
+```
+
+---
+
+## 3. Declaração de Variáveis
+
+O bloco de variáveis é responsável por reservar os espaços na memória do computador onde os dados mutáveis serão armazenados. Ele é iniciado estritamente pela palavra reservada `var`. 
+A declaração é feita inserindo o nome (ou nomes separados por vírgula) da variável seguido de dois pontos (`:`) e o seu respectivo tipo de dado.
+
+```zezinhol
+var
+  quantidade: inteiro
+  peso, altura: real
+  letra: caracter
+```
+*Atenção: Uma variável deve sempre ser declarada nesta seção antes de ser utilizada no corpo do algoritmo.*
+
+---
+
+## 4. Corpo do Algoritmo
+
+Esta é a área central onde a mágica acontece. O corpo do algoritmo concentra toda a lógica, cálculos, atribuições, estruturas de controle e interações com o usuário. 
+Este bloco vital deve ser obrigatoriamente aberto com a palavra `início` e encerrado com `fim algoritmo`.
+
+```zezinhol
+início
+  escreva("Digite o seu peso: ")
+  leia(peso)
+  
+  altura <- 1.75
+  
+  escreva("Seu peso é ", peso, " e sua altura é ", altura)
+fim algoritmo
+```
+
+---
+
+## Exemplo Completo de Estruturação
+
+Abaixo, veja como todos esses blocos se unem de forma harmônica na construção de um programa funcional e estruturado:
+
+```zezinhol
+algoritmo simuladorEscolar
+
+const
+  MEDIA_APROVACAO = 7.0
+
+tipos
+  Estudante registro
+    nome: string
+    idade: inteiro
+  fim registro
+
+var
+  alunoAtual: Estudante
+  nota1, nota2, mediaFinal: real
+
+início
+  // Entrada de dados
+  escreva("Digite o nome do aluno: ")
+  leia(alunoAtual.nome)
+  
+  escreva("Digite as duas notas: ")
+  leia(nota1, nota2)
+  
+  // Processamento e atribuição (<-)
+  mediaFinal <- (nota1 + nota2) / 2
+  
+  // Saída de dados
+  escreva("A média do aluno ", alunoAtual.nome, " é: ", mediaFinal)
+
+fim algoritmo
+```
+
+---
+
+## Boas Práticas e Regras de Sintaxe
+
+Para garantir que o código seja legível e executado corretamente, o programador deve respeitar as seguintes diretrizes:
+
+1. **Identação Rigorosa:** Utilize espaços ou marcações de tabulação (Tab) no início das linhas que estão dentro de blocos (como dentro do `início`, de laços de repetição ou de condicionais `se`). Isso organiza visualmente a hierarquia do código.
+2. **Palavras Reservadas:** Termos intrínsecos à linguagem (como `algoritmo`, `var`, `início`, `fim algoritmo`, `se`, `enquanto`, `para`, etc.) não podem ser usados como nomes de variáveis.
+3. **Padrão Manuscrito:** Caso esteja escrevendo o algoritmo à mão (como em provas e avaliações físicas), é uma convenção formal da disciplina sublinhar todas as palavras reservadas.

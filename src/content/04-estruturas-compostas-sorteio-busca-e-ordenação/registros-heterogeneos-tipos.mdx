@@ -1,0 +1,89 @@
+---
+title: "Registros heterogêneos (tipos)"
+description: "Guia completo sobre a criação e manipulação de registros e estruturas heterogêneas na linguagem Zezinhol."
+---
+
+# Registros Heterogêneos (`tipos`)
+
+Quando as informações agregadas possuem naturezas distintas, mas representam características de uma mesma identidade (como os campos `string`, `inteiro` e `real` pertencentes a um aluno), fazemos uso de um **registro**.
+
+Enquanto os vetores agrupam dados de um *mesmo* tipo (estruturas homogêneas), os registros permitem juntar dados de tipos variados sob um único identificador estruturado (estruturas heterogêneas).
+
+---
+
+## 1. Declaração de um Registro
+
+Na sintaxe formal da linguagem Zezinhol, a estrutura do registro deve ser definida obrigatoriamente de forma prévia em uma seção de `tipos`, posicionada acima da seção tradicional de variáveis (`var`).
+
+### Sintaxe Geral:
+```zezinhol
+tipos
+  NomeDoRegistro registro
+    campo1: tipo1
+    campo2: tipo2
+  fim registro
+```
+
+### Exemplo Prático de Declaração e Atribuição:
+
+```zezinhol
+algoritmo ExemploRegistro
+tipos
+  Pessoa registro
+    nome: string
+    idade: inteiro
+    altura: real
+  fim registro
+
+var
+  r: Pessoa
+início
+  r.nome <- "Bela Mota"
+  r.altura <- 1.75
+  leia(r.idade)
+  
+  escreva("Nome: ", r.nome)
+  escreva("Altura: ", r.altura)
+  escreva("Idade: ", r.idade)
+fim algoritmo
+```
+
+---
+
+## 2. Vetores de Registros
+
+A aplicação mais comum e poderosa nos algoritmos consiste em utilizar um tipo composto customizado (registro) como o **tipo-base de um vetor** de armazenamento em lote. Isso permite gerenciar grandes bases de dados estruturadas (como uma turma inteira de alunos ou uma lista de produtos).
+
+### Exemplo Prático de Vetor de Registros:
+
+```zezinhol
+algoritmo VetorDeRegistros
+tipos
+  Pessoa registro
+    inscricao: inteiro
+    nome: string
+    sexo: caracter
+  fim registro
+
+var
+  v: vetor [1..350] de Pessoa
+  i: inteiro
+início
+  para i de 1 até 350 faça
+    v[i].inscricao <- i
+    escreva("Digite o nome da pessoa ", i, ": ")
+    leia(v[i].nome)
+    escreva("Digite o sexo (M/F): ")
+    leia(v[i].sexo)
+  fim para
+  
+  escreva("Cadastro concluído com sucesso para 350 registros.")
+fim algoritmo
+```
+
+---
+
+## 3. Boas Práticas e Organização
+
+* **Seção Dedicada:** Nunca declare um registro diretamente dentro da seção `var`. Utilize sempre a seção `tipos` antes do bloco de variáveis.
+* **Acesso por Ponto (`.`):** Para acessar ou modificar um campo específico de um registro (seja ele isolado ou pertencente a um vetor), utiliza-se a notação de ponto conectando a variável do registro ao nome do campo (ex: `turma[i].nome` ou `r.idade`).

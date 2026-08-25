@@ -1,0 +1,69 @@
+---
+title: "Manipulação de caracteres e Tabela ASCII (asc(), chr())"
+description: "Guia detalhado sobre a Tabela ASCII, comparação e funções de manipulação de caracteres na linguagem Zezinhol."
+---
+
+# Manipulação de caracteres e Tabela ASCII (asc(), chr())
+
+Na linguagem Zezinhol, a manipulação de textos e símbolos exige o entendimento de como o computador os armazena e interpreta internamente. Para isso, utiliza-se a Tabela ASCII.
+
+## 1. A Tabela ASCII
+
+A tabela ASCII é uma tabela padronizada utilizada para representar caracteres por meio de códigos numéricos. Nessa tabela, cada caractere possui um número inteiro associado a ele, o que permite que o computador represente letras, dígitos, símbolos e comandos especiais.
+
+Existem dois grupos principais de caracteres na tabela ASCII:
+* Caracteres não imprimíveis: São caracteres de controle, ou seja, não aparecem diretamente na tela como letras ou símbolos. Eles representam ações ou comandos, como quebra de linha, tabulação e retorno de carro.
+* Caracteres imprimíveis: São os caracteres que podem ser visualizados normalmente, como letras, dígitos, sinais de pontuação, operadores e o espaço em branco. 
+
+Para os algoritmos desenvolvidos na linguagem Zezinhol, normalmente são utilizados os caracteres imprimíveis, pois eles representam os símbolos manipulados diretamente.
+
+## 2. Comparação entre Caracteres
+
+Os caracteres podem ser comparados utilizando os operadores relacionais. A comparação leva em consideração a ordem dos caracteres na tabela ASCII. 
+
+Como cada caractere possui um código numérico associado, comparar caracteres é, na verdade, equivalente a comparar esses códigos inteiros.
+
+### Exemplos Práticos:
+* 'A' < 'B' é verdadeiro. Na tabela ASCII, o caractere 'A' possui o código 65, enquanto o caractere 'B' possui o código 66.
+* 'a' > 'Z' é verdadeiro. O caractere 'a' (minúsculo) possui o código 97, enquanto o caractere 'Z' (maiúsculo) possui o código 90.
+
+Atenção: Letras maiúsculas e minúsculas possuem códigos diferentes, portanto, 'A' e 'a' não são considerados o mesmo caractere.
+
+## 3. Funções Nativas de Manipulação
+
+A linguagem Zezinhol oferece funções específicas para facilitar a conversão entre os caracteres visuais e seus respectivos códigos numéricos.
+
+### Função asc()
+A função asc() recebe um caractere como parâmetro e retorna o valor inteiro correspondente ao seu código na tabela ASCII.
+
+Exemplo de uso:
+```
+codigo <- asc('A')
+escreva(codigo) // Resultado: 65
+```
+
+Também é possível utilizar uma variável do tipo caracter como parâmetro:
+```
+letra <- 'B'
+codigo <- asc(letra)
+```
+
+### Função chr()
+A função chr() realiza exatamente a operação inversa da função asc(). Ela recebe um número inteiro e retorna o caractere correspondente àquele código na tabela ASCII.
+
+Exemplo de uso:
+```
+letra <- chr(65)
+escreva(letra) // Resultado: A
+```
+
+Essas funções são úteis quando precisamos converter entre caracteres e seus respectivos códigos numéricos.
+
+## 4. Manipulação Avançada (Strings)
+
+Como as cadeias de caracteres (string) são compostas por múltiplos caracteres, algumas operações complementares são possíveis:
+
+* Acesso individual: Uma string pode ser vista como uma sequência de caracteres. É possível acessar um caractere específico da string informando sua posição numérica entre colchetes. A posição inicial é 1.
+* Concatenação: É a operação de juntar caracteres ou strings para formar uma nova string. Na linguagem Zezinhol, essa operação pode ser feita utilizando o operador +.
+* Tamanho: A função tamanho() permite saber quantos caracteres existem em uma string.
+* Comparação de strings: Ocorre caractere por caractere, considerando os códigos de cada caractere na tabela ASCII. No primeiro caractere diferente, a comparação é decidida.

@@ -1,0 +1,65 @@
+---
+title: "Operadores: bit e, bit ou, bit nao, bit xor"
+description: "Documentação das operações lógicas bit a bit na linguagem Zezinhol."
+---
+
+# Operadores Bit a Bit
+
+Na linguagem Zezinhol, as operações bit a bit atuam diretamente sobre a representação binária dos números inteiros. Os operadores lógicos bit a bit disponíveis são: `bit e`, `bit ou`, `bit nao` e `bit xor`.
+
+Abaixo estão detalhados cada um destes operadores, com exemplos utilizando números representados com 8 bits.
+
+---
+
+## 1. Operador `bit e`
+
+Este operador realiza a operação AND bit a bit.
+
+### Sintaxe
+`inteiro bit e inteiro`
+
+### Exemplo
+n = 155 = 10011011
+m = 86 = 01010110
+n bit e m = 00010010 = 18
+
+---
+
+## 2. Operador `bit ou`
+
+Este operador realiza a operação OR bit a bit.
+
+### Sintaxe
+`inteiro bit ou inteiro`
+
+### Exemplo
+n = 150 = 10010110
+m = 45 = 00101101
+n bit ou m = 10111111 = 191
+
+---
+
+## 3. Operador `bit nao`
+
+Este operador inverte todos os bits do número.
+
+### Sintaxe
+`bit nao inteiro`
+
+### Exemplo
+n = 10 = 00001010
+bit nao n = 11110101 = 245
+
+---
+
+## 4. Operador `bit xor`
+
+Este operador realiza a operação OU-exclusivo (XOR).
+
+### Sintaxe
+`inteiro bit xor inteiro`
+
+### Exemplo
+n = 66 = 01000010
+m = 110 = 01101110
+n bit xor m = 00101100 = 44

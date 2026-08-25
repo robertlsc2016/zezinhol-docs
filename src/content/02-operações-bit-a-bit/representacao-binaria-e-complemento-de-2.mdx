@@ -1,0 +1,66 @@
+---
+title: "Representação Binária e Complemento de 2"
+description: "Conceitos de representação de números inteiros e negativos em binário na linguagem Zezinhol."
+---
+
+# Representação Binária e Complemento de 2
+
+## 1. Representação Binária
+
+Na linguagem Zezinhol, assim como nos sistemas computacionais, os números inteiros são representados internamente em base binária, ou seja, utilizando apenas os dígitos `0` e `1`.
+
+As operações bit a bit atuam diretamente sobre essa representação, manipulando os bits que compõem cada número. Para facilitar a visualização e o entendimento dos algoritmos, convenciona-se utilizar a representação em 8 bits para os exemplos didáticos.
+
+### Exemplos de Representação (8 bits):
+* 10 = 00001010
+* 46 = 00101110
+* 205 = 11001101
+
+---
+
+## 2. Complemento de 2
+
+Embora na linguagem Zezinhol seja comum utilizar o sinal negativo diretamente na escrita dos algoritmos (ex: `-5`), o complemento de 2 é uma forma fundamental de representação binária que auxilia na compreensão do que ocorre nas operações bit a bit por trás dos panos.
+
+O complemento de 2 é, portanto, uma maneira de representar números negativos em binário dentro dos sistemas computacionais.
+
+### 2.1 O Bit de Sinal
+Nesse tipo de representação, o bit posicionado mais à esquerda (chamado de bit mais significativo) é o responsável por indicar o sinal numérico:
+* `0` indica um número positivo.
+* `1` indica um número negativo.
+
+### 2.2 Como obter o Complemento de 2
+Para converter a representação binária de um número positivo para o seu equivalente negativo em complemento de 2, deve-se seguir dois passos exatos:
+
+1. **Inverter todos os bits do número:** Transformar todos os 0s em 1s e os 1s em 0s.
+2. **Somar 1 ao resultado obtido:** Adicionar uma unidade aritmética binária ao valor invertido.
+
+---
+
+## 3. Exemplo Prático de Conversão
+
+Vamos encontrar a representação em complemento de 2 para o número `-5`, partindo do valor de base positivo em 8 bits.
+
+**Valor Base:**
+`x = 5 = 00000101`
+
+**Passo 1: Inverter os bits (aplicando bit nao)**
+`00000101`  ->  `11111010`
+
+**Passo 2: Somar 1**
+`11111010` + `1`  ->  `11111011`
+
+**Resultado:**
+`x = -5 = 11111011`
+
+---
+
+## 4. Observação de Interpretação
+
+É importante ressaltar que uma mesma sequência de bits pode representar valores completamente diferentes dependendo da forma como ela é interpretada pelo contexto.
+
+Por exemplo, a sequência resultante `11111011`:
+* Quando interpretada como **número com sinal** (usando as regras do complemento de 2), ela representa o valor `-5`.
+* Quando a mesma sequência de bits é interpretada como um **número inteiro sem sinal**, ela corresponde ao valor decimal `251`.
+
+Isso ocorre porque, em base binária, o significado exato do valor armazenado depende da regra (com sinal ou sem sinal) aplicada naquele momento no sistema.
