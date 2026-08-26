@@ -6,12 +6,11 @@ import 'nextra-theme-docs/style.css'
 export const metadata = {
 }
  
-const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
+// const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
 const navbar = (
   <Navbar
     logo={<h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>Zezinhol Docs <span style={{ fontSize: "12px", fontWeight: "100"
     }}>By Robert Luiz</span></h1>}
-    // ... Your additional navbar options
   />
 )
 const footer = <Footer>Desenvolvido por Robert Luiz</Footer>
@@ -28,12 +27,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </Head>
       <body>
         <Layout
-          banner={banner}
+          // banner={banner}
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/robertlsc2016/zezinhol-docs"
           footer={footer}
-          // ... Your additional layout options
         >
           {children}
         </Layout>
