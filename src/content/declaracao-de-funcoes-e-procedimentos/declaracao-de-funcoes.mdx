@@ -1,0 +1,150 @@
+---
+title: "Declaração de Funções"
+description: "Guia completo sobre a criação, estruturação e utilização de funções na linguagem Zezinhol."
+---
+
+# Declaração e Utilização de Funções
+
+Na linguagem Zezinhol, as funções são sub-rotinas utilizadas para modularizar o código, permitindo que blocos de lógica sejam reaproveitados em diferentes partes do programa. Uma função recebe dados de entrada (parâmetros), processa essas informações e obrigatoriamente devolve um resultado ao final de sua execução através do comando `retorne`.
+
+---
+
+## 1. Regra de Declaração (Localização)
+
+Diferente de algumas linguagens comerciais, na linguagem Zezinhol **as funções devem ser declaradas obrigatoriamente dentro da seção `var`** do algoritmo principal. Elas dividem o espaço com a declaração das variáveis globais.
+
+Uma função também possui sua própria estrutura interna, contendo o seu cabeçalho com os parâmetros, sua própria seção de variáveis locais (`var`), seu corpo de execução (`início`), e seu encerramento com `fim função`.
+
+### Sintaxe Estrutural:
+```zezinhol
+var
+  // Variáveis globais do algoritmo principal
+  x, y: inteiro
+
+  função nomeDaFuncao(parametro1: tipo1, parametro2: tipo2) : tipoDeRetorno
+  var
+    // Variáveis locais (exclusivas da função)
+  início
+    // Lógica da função
+    retorne valorResultante
+  fim função
+```
+
+---
+
+## 2. Exemplos Práticos de Funções
+
+Abaixo estão 3 exemplos detalhados demonstrando a declaração correta na seção `var` e as diferentes formas de chamar a função no corpo principal do algoritmo.
+
+### Exemplo 1: Encontrar o Maior de Três Valores (Retorno Real)
+Este exemplo demonstra uma função simples que recebe três números reais, compara-os e retorna o maior entre eles. 
+
+```zezinhol
+algoritmo maiorDeTresNumeros
+var
+  a, b, c, RESULTADO: real
+  
+  // Declaração da função dentro do bloco VAR global
+  função maiorValor(a, b, c: real): real
+  var
+    maior: real
+  início
+    maior <- a
+    se b > maior então
+      maior <- b
+    fim se
+    se c > maior então
+      maior <- c
+    fim se
+    
+    retorne maior
+  fim função
+
+início
+  escreva("Digite três números: ")
+  leia(a, b, c)
+  
+  // Chamada da função passando os argumentos e guardando na variável
+  RESULTADO <- maiorValor(a, b, c)
+  
+  escreva("O maior valor é: ", RESULTADO)
+fim algoritmo
+```
+
+### Exemplo 2: Conversão de String para Inteiro
+Neste exemplo, a função analisa cada caractere de uma string textual para transformá-la em um valor matemático numérico inteiro, utilizando manipulação da tabela ASCII.
+
+```zezinhol
+algoritmo conversorTextoParaNumero
+var
+  textoDigitado: string
+  numeroConvertido: inteiro
+
+  // Declaração da função dentro do bloco VAR global
+  função converteStringEmInteiro(s : string) : inteiro
+  var
+    num, i : inteiro
+  início
+    se tamanho(s) = 0 então 
+      retorne -99999999
+    senão
+      num <- 0
+      i <- 1
+      enquanto i <= tamanho(s) faça 
+        se s[i] < '0' ou s[i] > '9' então
+          retorne -99999999
+        senão
+          // Converte o caractere ASCII para o valor numérico (0 a 9)
+          num <- num * 10 + asc(s[i]) - asc('0')
+        fim se
+        i <- i + 1
+      fim enquanto
+      
+      retorne num
+    fim se
+  fim função
+
+início
+  escreva("Digite uma sequencia numerica textual: ")
+  leia(textoDigitado)
+  
+  numeroConvertido <- converteStringEmInteiro(textoDigitado)
+  
+  se numeroConvertido = -99999999 então
+    escreva("Erro: A string contem caracteres invalidos.")
+  senão
+    escreva("O valor matematico convertido e: ", numeroConvertido)
+  fim se
+fim algoritmo
+```
+
+### Exemplo 3: Verificador de Número Par (Retorno Lógico)
+Neste último exemplo, criaremos uma função direta que retorna um valor do tipo `lógico` (`verdadeiro` ou `falso`), muito útil para validações condicionais limpas.
+
+```zezinhol
+algoritmo verificadorParidade
+var
+  numeroUsuario: inteiro
+  
+  // Declaração da função dentro do bloco VAR global
+  função ehPar(n: inteiro): lógico
+  início
+    se n mod 2 = 0 então
+      retorne verdadeiro
+    senão
+      retorne falso
+    fim se
+  fim função
+
+início
+  escreva("Digite um numero inteiro para teste: ")
+  leia(numeroUsuario)
+  
+  // A função lógica pode ser chamada diretamente dentro da condicional 'se'
+  se ehPar(numeroUsuario) então
+    escreva("O numero ", numeroUsuario, " e PAR.")
+  senão
+    escreva("O numero ", numeroUsuario, " e IMPAR.")
+  fim se
+fim algoritmo
+```

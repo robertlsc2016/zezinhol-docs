@@ -1,0 +1,147 @@
+---
+title: "Declaração de Procedimentos"
+description: "Guia completo sobre a criação, estruturação e utilização de procedimentos e modularização na linguagem Zezinhol."
+---
+
+# Declaração e Utilização de Procedimentos
+
+Na linguagem Zezinhol, um **procedimento** é uma estrutura fundamental de modularização utilizada para encapsular uma tarefa específica. Assim como os algoritmos principais, os procedimentos possuem sua própria declaração, parâmetros, variáveis locais e um bloco delimitado por `início` e `fim procedimento`.
+
+A regra de ouro para entender esta estrutura é: **Procedimento = módulo que executa uma tarefa, mas não retorna um valor.**
+
+Ao contrário das funções (que obrigatoriamente devolvem um valor matemático, lógico ou textual ao final através do comando `retorne`), a finalidade do procedimento é executar uma ação (como imprimir dados na tela, processar um arquivo ou alterar variáveis passadas por referência). Comandos nativos muito utilizados, como `leia` e `escreva`, seguem exatamente esse conceito: eles executam tarefas específicas, mas não retornam um valor para ser atribuído a uma variável.
+
+---
+
+## 1. Estrutura e Características
+
+* **Parâmetros:** Um procedimento pode receber parâmetros para fornecer dados necessários à sua execução.
+* **Passagem por Referência (`ref`):** É possível alterar variáveis do escopo de origem adicionando a palavra reservada `ref` antes do parâmetro. Isso cria um elo direto com a variável original.
+* **Variáveis Locais:** Pode declarar variáveis em sua própria seção `var`, as quais existirão e ocuparão memória apenas durante a execução do procedimento.
+* **Aninhamento:** Um procedimento pode declarar outros procedimentos e funções *dentro* de sua própria seção `var`, permitindo a criação de submódulos auxiliares altamente específicos (procedimentos aninhados).
+
+### Sintaxe Geral:
+```zezinhol
+procedimento nomeDoProcedimento(parametro1 : tipo1; ref parametro2 : tipo2)
+var
+  // Variáveis locais exclusivas do procedimento
+início
+  // Comandos e lógica
+fim procedimento
+```
+
+---
+
+## 2. Exemplos Práticos de Procedimentos
+
+Abaixo estão 3 exemplos detalhados de como criar, aninhar e utilizar procedimentos. Assim como as funções, eles devem ser declarados na seção `var` (ou correspondente) do algoritmo ou bloco que os contém.
+
+### Exemplo 1: Procedimento Básico (Iteração e I/O)
+Este é um exemplo clássico de um procedimento simples que recebe dois parâmetros por valor para executar uma tarefa de repetição, sem afetar o escopo externo e sem retornar valores.
+
+```zezinhol
+algoritmo ExemploProcedimentoSimples
+var
+  inicioIntervalo, fimIntervalo: inteiro
+
+  procedimento escreveNumeros(inicio, fim : inteiro)
+  var
+    i : inteiro
+  início
+    para i de inicio até fim faça
+      escreva(i)
+    fim para
+  fim procedimento
+
+início
+  escreva("Digite o início e o fim do intervalo: ")
+  leia(inicioIntervalo, fimIntervalo)
+  
+  // Chamada do procedimento pelo nome, passando os argumentos
+  escreveNumeros(inicioIntervalo, fimIntervalo)
+fim algoritmo
+```
+
+### Exemplo 2: Processamento de Arquivos
+Neste exemplo, o procedimento recebe uma string (nome do arquivo), processa dados de uma sequência e gerencia lógicas internas de forma isolada, limpando o código principal.
+
+```zezinhol
+algoritmo ExemploProcessaArquivo
+var
+  nomeDoArquivo: string
+
+  procedimento escreveSegundaMetade(s : string)
+  var
+    tamanho: inteiro
+    f: sequencia de real
+    numAtual: real
+  início
+    tamanho <- 0
+    se abre(f, s) então
+      // Primeira passagem: descobre o tamanho total do arquivo
+      enquanto não fds(f) faça
+        tamanho <- tamanho + 1
+        leia(f, numAtual)
+      fim enquanto
+      
+      reinicia(f)
+      tamanho <- tamanho div 2
+      
+      // Segunda passagem: avança até a metade e imprime o restante
+      enquanto não fds(f) faça
+        leia(f, numAtual)
+        se tamanho = 0 então
+          escreva(numAtual)
+        senão
+          tamanho <- tamanho - 1
+        fim se
+      fim enquanto
+      fecha(f)
+    fim se
+  fim procedimento
+
+início
+  nomeDoArquivo <- "dados.txt"
+  escreveSegundaMetade(nomeDoArquivo)
+fim algoritmo
+```
+
+### Exemplo 3: Procedimentos Aninhados e Passagem por Referência (`ref`)
+Este exemplo ilustra dois conceitos avançados: a capacidade de modificar variáveis do programa principal utilizando `ref` e a criação de procedimentos aninhados (um procedimento declarado dentro da área de variáveis de outro).
+
+```zezinhol
+algoritmo ExemploAninhadoEReferencia
+var
+  x, y, s, p: inteiro
+
+  // O uso de 'ref' permite que as variáveis 'soma' e 'produto' alterem os valores
+  // originais das variáveis que forem passadas na chamada do procedimento.
+  procedimento calculaSomaEProduto(a, b : inteiro; ref soma, ref produto : inteiro)
+  var
+    // Procedimento aninhado: declarado DENTRO do procedimento calculaSomaEProduto.
+    // Ele só pode ser chamado internamente por este procedimento pai.
+    procedimento exibeCabecalho()
+    início
+      escreva("====================================")
+      escreva("   Iniciando Calculos Modulares     ")
+      escreva("====================================")
+    fim procedimento
+    
+  início
+    exibeCabecalho() // Chamando o procedimento aninhado
+    soma <- a + b
+    produto <- a * b
+  fim procedimento
+
+início
+  x <- 5
+  y <- 10
+  
+  // Passando 's' e 'p'. Como o procedimento as recebe com 'ref', 
+  // os resultados calculados lá dentro refletirão diretamente em 's' e 'p' aqui fora.
+  calculaSomaEProduto(x, y, s, p)
+  
+  escreva("A soma eh: ", s)
+  escreva("O produto eh: ", p)
+fim algoritmo
+```
