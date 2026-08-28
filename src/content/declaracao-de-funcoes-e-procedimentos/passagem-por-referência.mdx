@@ -1,0 +1,134 @@
+---
+title: "Passagem de Parâmetros por Referência (ref)"
+description: "Guia detalhado sobre a passagem de parâmetros por referência em funções e procedimentos na linguagem Zezinhol."
+---
+
+# Passagem de Parâmetros por Referência (`ref`)
+
+Na linguagem Zezinhol, ao passar dados para uma função ou procedimento, o comportamento padrão é a "passagem por valor" (onde apenas uma cópia do dado é enviada para o submódulo). No entanto, quando precisamos que o subprograma altere o valor da variável original que foi passada na chamada, utilizamos a **passagem por referência**, sinalizada pela palavra reservada `ref` [cite: 10].
+
+---
+
+## 1. O que é a Passagem por Referência?
+
+É possível alterar variáveis do escopo de origem (como o algoritmo principal ou um módulo chamador superior) adicionando a palavra reservada `ref` antes do parâmetro na declaração da função ou procedimento [cite: 10]. 
+
+Isso cria um **elo direto** com a variável original na memória [cite: 10]. Qualquer modificação, cálculo ou atribuição feita no parâmetro dentro da sub-rotina refletirá imediatamente e de forma permanente na variável externa correspondente.
+
+---
+
+## 2. Sintaxe Geral
+
+Para definir que um ou mais parâmetros serão passados por referência, insere-se a palavra `ref` antes do nome da variável (ou da lista de variáveis) na assinatura do procedimento ou função.
+
+```zezinhol
+procedimento nomeDoProcedimento(parametroPorValor : tipo; ref parametroPorReferencia : tipo)
+
+```
+
+*Nota:* É possível agrupar múltiplas variáveis do mesmo tipo que compartilharão a passagem por referência: `ref var1, var2, var3 : tipo` [cite: 10].
+
+---
+
+## 3. Exemplos Práticos
+
+Abaixo, exploramos cenários clássicos e avançados onde o uso do `ref` é indispensável.
+
+### Exemplo 1: Simulando Múltiplos Retornos
+
+Como as funções na linguagem Zezinhol retornam apenas um único valor através do comando `retorne`, podemos utilizar procedimentos com parâmetros `ref` para "devolver" múltiplos resultados calculados de uma só vez [cite: 10]. O uso de `ref` permite que as variáveis internas alterem os valores originais das variáveis que forem passadas na chamada do procedimento [cite: 10].
+
+```zezinhol
+algoritmo MultiplosResultados
+var
+  x, y, s, p: inteiro
+
+  // 'soma' e 'produto' estão marcados com 'ref'. Modificá-los altera as variáveis originais.
+  procedimento calculaSomaEProduto(a, b : inteiro; ref soma, ref produto : inteiro)
+  início
+    soma <- a + b
+    produto <- a * b
+  fim procedimento
+
+início
+  x <- 5
+  y <- 10
+  
+  // Passando 's' e 'p' por referência.
+  // O procedimento fará os cálculos e os resultados preencherão essas variáveis diretamente.
+  calculaSomaEProduto(x, y, s, p)
+  
+  escreva("A soma eh: ", s)
+  escreva("O produto eh: ", p)
+fim algoritmo
+
+```
+
+### Exemplo 2: Troca de Valores (Swap)
+
+Um uso obrigatório da passagem por referência é o algoritmo de troca (swap), onde precisamos inverter os valores de duas variáveis externas. Se não usássemos `ref`, apenas as cópias locais seriam trocadas, e as variáveis originais no programa principal permaneceriam intactas.
+
+```zezinhol
+algoritmo ExemploTroca
+var
+  v1, v2: inteiro
+
+  procedimento trocaValores(ref a, ref b : inteiro)
+  var
+    aux: inteiro
+  início
+    aux <- a
+    a <- b
+    b <- aux
+  fim procedimento
+
+início
+  v1 <- 10
+  v2 <- 99
+  
+  escreva("Antes: v1 = ", v1, " | v2 = ", v2)
+  
+  // As variáveis originais são modificadas internamente pelo procedimento
+  trocaValores(v1, v2)
+  
+  escreva("Depois: v1 = ", v1, " | v2 = ", v2)
+fim algoritmo
+
+```
+
+### Exemplo 3: Passagem de Referência em Tipos Complexos (Listas/Ponteiros)
+
+Em estruturas de dados avançadas, como o controle de listas encadeadas, o `ref` é intensamente utilizado para atualizar os ponteiros de controle (cabeçalhos e caudas) das listas externas a partir de um procedimento, muitas vezes em cenários recursivos [cite: 10].
+
+```zezinhol
+algoritmo ExemploPonteiros
+tipos
+  PNo = ponteiro para TNo
+  TNo = registro
+    info : inteiro
+    prox : PNo
+  fim registro
+  
+var
+  l1, l2, listaPar, listaImpar: PNo
+
+  // 'lPar' e 'lImpar' recebem ref para que o procedimento consiga instanciar e
+  // atualizar as listas principais do algoritmo base [cite: 10].
+  procedimento separaParesEImpares(l1, l2 : PNo; ref lPar, lImpar : PNo)
+  var
+    ultPar, ultImpar : PNo
+  início
+    // ... logica interna de iteração da lista ...
+    // Se a lógica atribuir um nó a 'lPar', a variável externa 'listaPar' 
+    // apontará instantaneamente para esse novo nó na memória.
+  fim procedimento
+
+início
+  listaPar <- NULO
+  listaImpar <- NULO
+  
+  // Chamada que preencherá listaPar e listaImpar, pois estão atreladas por 'ref'
+  separaParesEImpares(l1, l2, listaPar, listaImpar)
+fim algoritmo
+
+```
