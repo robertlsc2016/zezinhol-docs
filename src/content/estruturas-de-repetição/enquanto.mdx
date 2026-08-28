@@ -1,0 +1,132 @@
+---
+title: "Laço de repetição (enquanto)"
+description: "Guia completo sobre a estrutura de repetição condicional na linguagem Zezinhol."
+---
+
+# Laço de repetição (`enquanto`)
+
+A estrutura `enquanto` é um laço de repetição condicional. Ela é utilizada principalmente em situações onde o **número de iterações não é previamente conhecido**, dependendo exclusivamente de uma condição lógica para continuar ou interromper a repetição [cite: 1].
+
+Diferente do laço `para` (que é projetado para contagens fixas), o `enquanto` é altamente flexível, permitindo criar desde validações de entrada de usuário até contagens regressivas e incrementos customizados.
+
+---
+
+## 1. Sintaxe Geral
+
+A estrutura básica é composta pelas palavras reservadas `enquanto`, a condição lógica, `faça`, o bloco de comandos internos e o encerramento com `fim enquanto` [cite: 3].
+
+```zezinhol
+enquanto condiçãoLógica faça
+  // Comandos a serem repetidos enquanto a condição for verdadeira
+fim enquanto
+```
+
+---
+
+## 2. Funcionamento Interno e Regras
+
+* **Teste Prévio (Pré-condição):** O laço `enquanto` testa a condição *antes* de executar o bloco de comandos. Se a condição for falsa logo na primeira verificação, o bloco de comandos interno **nunca será executado**.
+* **Atualização Manual:** Diferente do laço `para`, o `enquanto` **não incrementa variáveis automaticamente**. O programador é totalmente responsável por inicializar as variáveis de controle antes do laço e atualizá-las (incrementar, decrementar ou ler novos dados) dentro do bloco. O esquecimento dessa atualização causa o famoso **"loop infinito"**.
+* **Flexibilidade de Passos:** Como a atualização é manual, você pode criar contagens com qualquer passo numérico: pulando de 2 em 2, de 10 em 10, ou fazendo contagens regressivas (subtraindo).
+
+---
+
+## 3. Exemplos Práticos
+
+Abaixo estão exemplos detalhados de cenários ideais para a utilização do laço `enquanto`.
+
+### Exemplo 1: Validação de Entrada (Repetição Indefinida)
+Este é um dos usos mais clássicos do `enquanto`. O algoritmo "prende" o usuário no laço até que ele digite um valor válido, não importando quantas tentativas ele faça.
+
+```zezinhol
+algoritmo validacaoIdade
+var
+  idade: inteiro
+início
+  escreva("Digite uma idade valida (maior que 0): ")
+  leia(idade)
+  
+  // O laço continua repetindo ENQUANTO o usuário digitar um valor inválido
+  enquanto idade <= 0 faça
+    escreva("Idade invalida! Por favor, digite um valor maior que 0: ")
+    leia(idade) // Atualiza a variável de controle para evitar loop infinito
+  fim enquanto
+  
+  escreva("Obrigado! A idade informada foi: ", idade)
+fim algoritmo
+```
+
+### Exemplo 2: Contagem com Passo Customizado
+Diferente do laço `para` (que só avança de +1 em +1), o `enquanto` permite pular números ou retroceder. Neste exemplo, imprimimos apenas os números pares de 0 até 20.
+
+```zezinhol
+algoritmo contagemPares
+var
+  contador: inteiro
+início
+  contador <- 0 // Inicialização
+  
+  escreva("Contando de 2 em 2:")
+  enquanto contador <= 20 faça
+    escreva(contador)
+    contador <- contador + 2 // Incremento customizado (passo 2)
+  fim enquanto
+fim algoritmo
+```
+
+### Exemplo 3: Contagem Regressiva
+Neste exemplo, o laço começa com um valor alto e vai diminuindo até chegar à condição de parada.
+
+```zezinhol
+algoritmo contagemRegressiva
+var
+  tempo: inteiro
+início
+  tempo <- 10 // Inicialização
+  
+  escreva("Iniciando lancamento...")
+  
+  enquanto tempo > 0 faça
+    escreva(tempo, "...")
+    tempo <- tempo - 1 // Decremento (atualização manual)
+  fim enquanto
+  
+  escreva("Fogo!")
+fim algoritmo
+```
+
+### Exemplo 4: Menu Interativo (Flag de Saída)
+Uma estrutura comum em sistemas é manter um menu aberto até que o usuário escolha a opção de sair (geralmente representada por um número específico, chamado de *flag* ou *sentinela*).
+
+```zezinhol
+algoritmo menuInterativo
+var
+  opcao: inteiro
+início
+  opcao <- 0
+  
+  // Repete enquanto o usuário não escolher a opção 3 (Sair)
+  enquanto opcao != 3 faça
+    escreva("--- MENU ---")
+    escreva("1. Ver saldo")
+    escreva("2. Fazer deposito")
+    escreva("3. Sair")
+    escreva("Escolha uma opcao: ")
+    leia(opcao)
+    
+    se opcao = 1 então
+      escreva("Seu saldo e R$ 100,00.")
+    senão
+      se opcao = 2 então
+        escreva("Deposito realizado.")
+      senão
+        se opcao != 3 então
+          escreva("Opcao invalida!")
+        fim se
+      fim se
+    fim se
+  fim enquanto
+  
+  escreva("Sistema encerrado.")
+fim algoritmo
+```

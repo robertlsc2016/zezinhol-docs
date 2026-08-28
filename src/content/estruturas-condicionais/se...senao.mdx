@@ -1,0 +1,132 @@
+---
+title: "Estrutura Condicional Composta (se...senão)"
+description: "Guia completo sobre a estrutura de controle de fluxo condicional composta e aninhamentos na linguagem Zezinhol."
+---
+
+# Estrutura Condicional Composta (`se...senão`)
+
+Enquanto a condicional simples (`se`) permite executar um bloco de código apenas quando uma condição é verdadeira, a estrutura condicional composta `se...senão` é utilizada quando precisamos garantir um desvio de fluxo com duas vias alternativas [cite: 1]. 
+
+Em outras palavras, o algoritmo tomará uma decisão: se a condição for verdadeira, executará o primeiro bloco; se for falsa, executará obrigatoriamente o segundo bloco [cite: 1]. Nunca os dois blocos serão executados ao mesmo tempo, e o algoritmo nunca passará direto sem executar um deles.
+
+---
+
+## 1. Regras e Sintaxe Geral
+
+A estrutura é iniciada com a palavra reservada `se`, seguida da condição lógica e de `então`. O bloco de comandos verdadeiro é escrito em seguida. Depois, insere-se a palavra reservada `senão`, seguida do bloco de comandos para o caso falso. Toda a estrutura, independentemente de quantos `senão` possua internamente, é encerrada com um único `fim se` referente àquele `se` aberto [cite: 1].
+
+### Sintaxe:
+```zezinhol
+se condição então
+  // Comandos executados obrigatoriamente se a condição for VERDADEIRA
+senão
+  // Comandos executados obrigatoriamente se a condição for FALSA
+fim se
+
+```
+
+---
+
+## 2. Condicionais Encadeadas (Aninhamento)
+
+O verdadeiro poder do `se...senão` aparece quando precisamos testar mais de duas possibilidades exclusivas (por exemplo, classificar algo como pequeno, médio ou grande). Para isso, podemos inserir uma nova estrutura `se...senão` inteira dentro do bloco `senão` da estrutura anterior [cite: 1].
+
+Isso é chamado de **encadeamento** ou **aninhamento**.
+
+* **Regra de Ouro do Aninhamento:** Para cada `se` que você abrir no seu algoritmo, deverá existir um `fim se` correspondente para fechá-lo. Eles devem ser fechados na ordem inversa de abertura (de dentro para fora) [cite: 1].
+
+---
+
+## 3. Exemplos Práticos
+
+Abaixo estão três exemplos práticos, evoluindo de uma decisão simples de duas vias para uma árvore de decisão complexa aninhada.
+
+### Exemplo 1: Decisão de Duas Vias (Par ou Ímpar)
+
+Neste cenário clássico, um número inteiro só pode ser duas coisas: ou ele é par, ou é ímpar. O `senão` captura perfeitamente a alternativa lógica.
+
+```zezinhol
+algoritmo verificaParidade
+var
+  numero: inteiro
+início
+  escreva("Digite um numero inteiro: ")
+  leia(numero)
+  
+  // Se o resto da divisão por 2 for zero, é par.
+  se numero mod 2 = 0 então
+    escreva("O numero ", numero, " e PAR.")
+  senão
+    // Se não for zero, obrigatoriamente é ímpar.
+    escreva("O numero ", numero, " e IMPAR.")
+  fim se
+fim algoritmo
+
+```
+
+### Exemplo 2: Decisão de Três Vias (Sistema de Notas)
+
+Aqui, utilizamos o encadeamento para lidar com três estados possíveis: Aprovado, Recuperação ou Reprovado.
+
+```zezinhol
+algoritmo sistemaDeNotas
+var
+  nota: real
+início
+  escreva("Digite a nota final do aluno (0 a 10): ")
+  leia(nota)
+  
+  se nota >= 7.0 então
+    escreva("Aluno APROVADO direto!")
+  senão
+    // Se a nota não for >= 7.0, caímos no senão e fazemos uma nova pergunta:
+    se nota >= 5.0 então
+      escreva("Aluno em RECUPERACAO.")
+    senão
+      // Se não for >= 7.0 e também não for >= 5.0, só resta a reprovação.
+      escreva("Aluno REPROVADO.")
+    fim se // Fecha o segundo 'se' (recuperação)
+  fim se // Fecha o primeiro 'se' (aprovação)
+fim algoritmo
+
+```
+
+### Exemplo 3: Menu de Opções com Aninhamento Profundo
+
+Este exemplo demonstra a construção de um menu de opções utilizando a estrutura aninhada, onde apenas a alternativa correta é executada, ou uma mensagem de erro é exibida no último `senão`.
+
+```zezinhol
+algoritmo menuCalculadora
+var
+  opcao: inteiro
+  v1, v2: real
+início
+  escreva("--- MENU CALCULADORA ---")
+  escreva("1 - Somar")
+  escreva("2 - Subtrair")
+  escreva("3 - Multiplicar")
+  escreva("Escolha a operacao: ")
+  leia(opcao)
+  
+  se opcao >= 1 e opcao <= 3 então
+    escreva("Digite dois numeros: ")
+    leia(v1, v2)
+    
+    se opcao = 1 então
+      escreva("Soma: ", v1 + v2)
+    senão
+      se opcao = 2 então
+        escreva("Subtracao: ", v1 - v2)
+      senão
+        // Como validamos que a opção está entre 1 e 3 lá no começo,
+        // se não é 1 e não é 2, com certeza é 3.
+        escreva("Multiplicacao: ", v1 * v2)
+      fim se
+    fim se
+  senão
+    // Cai aqui se o usuário digitar algo diferente de 1, 2 ou 3 logo de cara.
+    escreva("Erro: Opcao invalida. Reinicie o programa.")
+  fim se
+fim algoritmo
+
+```

@@ -1,0 +1,45 @@
+---
+title: "Declaração de Constantes (const)"
+description: "Guia completo sobre a seção de constantes na linguagem Zezinhol."
+---
+
+# Declaração de Constantes (`const`)
+
+Nesta seção, abordaremos a utilização da seção de constantes (`const`), um recurso fundamental para a estruturação e otimização de algoritmos na linguagem Zezinhol.
+
+---
+
+Além da tradicional seção `var` (destinada a variáveis cujos valores mudam ao longo da execução), a linguagem Zezinhol permite utilizar uma seção de constantes.
+
+### O que são Constantes?
+As constantes representam **valores fixos**, isto é, dados que são definidos uma única vez e **não devem mudar** durante toda a execução do algoritmo. 
+
+### Regras de Declaração:
+* A seção de constantes deve ser obrigatoriamente definida **antes** da seção `var`.
+* A estrutura geral de declaração é composta pela palavra reservada `const` seguida do nome da constante e seu valor atribuído:
+
+```zezinhol
+const
+  NOME_CONSTANTE = valor
+```
+*(Nota: verifique a sintaxe exata da sua versão, pode ser `NOME_CONSTANTE valor` ou `NOME_CONSTANTE = valor`)*
+
+### Exemplo Prático de Utilização:
+```zezinhol
+algoritmo exemploConstantes
+const
+  MAX = 75
+var
+  i: inteiro
+  s: string
+início
+  s <- "Limite"
+  i <- MAX
+  escreva(i, " ", s)
+fim algoritmo
+```
+
+### Por que utilizar Constantes?
+* **Organização:** O código fica mais limpo e legível.
+* **Manutenibilidade:** Caso o valor fixo precise ser alterado no futuro (por exemplo, um limite máximo ou uma taxa), ele é modificado em um único lugar (no topo do código), evitando alterações manuais espalhadas por todo o corpo do algoritmo.
+* **Segurança:** Tentar alterar o valor de uma constante no corpo do algoritmo (como fazer `MAX <- 100`) é um erro e **não deve ser feito**, pois a essência da constante é a imutabilidade.

@@ -1,0 +1,122 @@
+---
+title: "Laço de repetição (para)"
+description: "Guia completo sobre a estrutura de repetição finita com contador na linguagem Zezinhol."
+---
+
+# Laço de repetição (`para`)
+
+A estrutura `para` é um laço de repetição projetado para situações onde a **quantidade de repetições é conhecida previamente** ou pode ser determinada com exatidão antes do laço começar [cite: 3].
+
+Diferente do laço `enquanto` (que depende puramente de uma condição lógica que pode ser alterada a qualquer momento), o `para` é uma estrutura de contagem finita e automática.
+
+---
+
+## 1. Sintaxe Geral
+
+A estrutura básica é composta pela palavra reservada `para`, seguida da variável de controle, do valor inicial, do valor limite (final) e do bloco de comandos:
+
+```zezinhol
+para variavel de valorInicial até valorFinal faça
+  comandos
+fim para
+
+```
+
+---
+
+## 2. Funcionamento Interno e Regras
+
+* **Variável de Controle:** Na linguagem Zezinhol, a estrutura `para` trabalha obrigatoriamente com uma variável de controle (geralmente uma variável do tipo `inteiro`, como `i` ou `cont`) [cite: 3].
+* **Incremento Automático e Fixo (+1):** Diferente de outras linguagens de programação, na linguagem Zezinhol **não é possível** definir passos customizados (como incrementar de 2 em 2, 3 em 3 ou fazer contagem regressiva). A variável de controle recebe o `valorInicial` na primeira iteração e é **incrementada estritamente de 1 em 1** a cada nova repetição [cite: 3]. Caso a lógica exija uma atualização diferente de um incremento unitário, deve-se obrigatoriamente utilizar a estrutura `enquanto` [cite: 3].
+* **Regra de Início e Destino:** Devido ao passo ser obrigatoriamente crescente (+1), **o valor de início precisa ser menor (ou igual) ao valor de destino**. Se o número de início fornecido for maior que o número final (destino), o laço simplesmente não executará seu bloco de comandos nenhuma vez.
+* **Equivalência Lógica:** O laço `para` pode ser compreendido como uma forma abreviada de um `enquanto`. O bloco abaixo:
+
+```zezinhol
+para i de 1 até 5 faça
+  escreva(i)
+fim para
+
+```
+
+Possui o funcionamento estritamente equivalente a:
+
+```zezinhol
+i <- 1
+enquanto i <= 5 faça
+  escreva(i)
+  i <- i + 1
+fim enquanto
+
+```
+
+---
+
+## 3. Exemplos Práticos
+
+Abaixo estão exemplos de como utilizar o laço `para` em diferentes cenários comuns.
+
+### Exemplo 1: Contagem Simples e Acumulação
+
+Neste exemplo, utilizamos o laço para somar os números inteiros de 1 a 100.
+
+```zezinhol
+algoritmo somaCemPrimeiros
+var
+  i, soma: inteiro
+início
+  soma <- 0
+  
+  // O início (1) é menor que o destino (100), e o incremento é automático de 1 em 1.
+  para i de 1 até 100 faça
+    soma <- soma + i
+  fim para
+  
+  escreva("A soma dos 100 primeiros numeros inteiros e: ", soma)
+fim algoritmo
+
+```
+
+### Exemplo 2: Percorrendo uma String (Cadeia de Caracteres)
+
+Como as strings são sequências indexadas de caracteres, a estrutura `para` encaixa-se perfeitamente para percorrê-las posição por posição [cite: 3]. A função nativa `tamanho()` é frequentemente usada para definir o limite final do laço [cite: 3].
+
+```zezinhol
+algoritmo soletraPalavra
+var
+  palavra: string
+  i: inteiro
+início
+  escreva("Digite uma palavra: ")
+  leia(palavra)
+  
+  escreva("Soletrando:")
+  
+  // O laço vai da posição 1 até a última letra da palavra informada
+  para i de 1 até tamanho(palavra) faça
+    escreva("Posicao ", i, ": ", palavra[i])
+  fim para
+fim algoritmo
+
+```
+
+### Exemplo 3: Leitura e Preenchimento de Vetores
+
+O laço `para` é a principal ferramenta para popular estruturas de dados estáticas, como vetores, varrendo de índice em índice.
+
+```zezinhol
+algoritmo leNotas
+var
+  notas: vetor [1..5] de real
+  i: inteiro
+início
+  escreva("Digite as notas dos 5 alunos:")
+  
+  para i de 1 até 5 faça
+    escreva("Nota ", i, ": ")
+    leia(notas[i])
+  fim para
+  
+  escreva("Leitura concluída com sucesso!")
+fim algoritmo
+
+```

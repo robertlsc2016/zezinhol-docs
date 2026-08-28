@@ -1,0 +1,113 @@
+---
+title: "Estrutura Condicional Simples (se)"
+description: "Guia completo sobre a estrutura de controle de fluxo condicional simples na linguagem Zezinhol."
+---
+
+# Estrutura Condicional Simples (`se`)
+
+A estrutura condicional simples `se` é um recurso fundamental de controle de fluxo na linguagem Zezinhol. Ela permite que o algoritmo tome decisões, executando um bloco específico de código **apenas quando** uma determinada condição lógica for avaliada como verdadeira. 
+
+Caso a condição testada resulte em falso, o algoritmo simplesmente ignora os comandos contidos dentro do bloco e segue o seu fluxo normal de execução para a próxima linha de código após o fim da estrutura.
+
+---
+
+## 1. Regras e Sintaxe Geral
+
+A estrutura é sempre iniciada com a palavra reservada `se`, seguida da condição lógica que será testada e da palavra reservada `então`. Todo o bloco de comandos que pertence à condição deve ser encerrado obrigatoriamente com a marcação `fim se`.
+
+### Sintaxe:
+```zezinhol
+se condição então
+  // Comandos que serão executados EXCLUSIVAMENTE se a condição for verdadeira
+fim se
+
+```
+
+### Construção da Condição:
+
+A `condição` avaliada pela estrutura `se` deve resultar sempre em um valor do tipo `lógico` (`verdadeiro` ou `falso`). Isso geralmente é alcançado através do uso de:
+
+* **Operadores Relacionais:** `=` (igual), `!=` ou `<>` (diferente), `>` (maior), `<` (menor), `>=` (maior ou igual), `<=` (menor ou igual).
+* **Operadores Lógicos:** `e`, `ou`, `não` (para combinar ou inverter múltiplas condições).
+* **Variáveis Lógicas:** Uma variável declarada como `lógico` ou o retorno de uma função lógica pode ser testada diretamente.
+
+---
+
+## 2. Exemplos Práticos
+
+Abaixo estão exemplos práticos focados exclusivamente no uso da condicional simples, demonstrando cenários onde uma ação só é necessária se um critério for atingido.
+
+### Exemplo 1: Verificação Simples (Número Positivo)
+
+Neste exemplo, o programa avisa o usuário apenas se ele digitar um número maior que zero. Se digitar zero ou um número negativo, o programa simplesmente termina sem imprimir a mensagem condicional.
+
+```zezinhol
+algoritmo verificaPositivo
+var
+  numero: inteiro
+início
+  escreva("Digite um numero inteiro: ")
+  leia(numero)
+  
+  se numero > 0 então
+    escreva("Você digitou um numero POSITIVO.")
+  fim se
+  
+  escreva("Fim da execucao.")
+fim algoritmo
+
+```
+
+### Exemplo 2: Aplicação de Regra de Negócio (Desconto)
+
+Aqui, utilizamos o `se` para aplicar um desconto no valor de uma compra, mas apenas se o valor atingir um gasto mínimo estipulado. Se não atingir, o valor original se mantém inalterado.
+
+```zezinhol
+algoritmo aplicaDesconto
+const
+  GASTO_MINIMO = 100.0
+  TAXA_DESCONTO = 0.10 // 10%
+var
+  valorCompra: real
+início
+  escreva("Digite o valor total da compra: R$ ")
+  leia(valorCompra)
+  
+  // O desconto só é aplicado se a condição for verdadeira
+  se valorCompra >= GASTO_MINIMO então
+    valorCompra <- valorCompra - (valorCompra * TAXA_DESCONTO)
+    escreva("Parabéns! Você ganhou 10% de desconto.")
+  fim se
+  
+  escreva("O valor final a ser pago é: R$ ", valorCompra)
+fim algoritmo
+
+```
+
+### Exemplo 3: Teste de Múltiplas Condições (Operadores Lógicos)
+
+Neste cenário, avaliamos mais de um critério na mesma estrutura `se` utilizando o operador lógico `e`.
+
+```zezinhol
+algoritmo validacaoIdadeECarteira
+var
+  idade: inteiro
+  temCarteira: lógico
+  resposta: caracter
+início
+  escreva("Qual a sua idade? ")
+  leia(idade)
+  
+  escreva("Você possui carteira de motorista? (S/N): ")
+  leia(resposta)
+  
+  // Convertendo a resposta em um valor lógico
+  temCarteira <- (resposta = 'S') ou (resposta = 's')
+  
+  // O bloco só executa se a idade for adequada E o usuário tiver carteira
+  se (idade >= 18) e (temCarteira = verdadeiro) então
+    escreva("Você está autorizado a dirigir o veículo.")
+  fim se
+fim algoritmo
+
+```
