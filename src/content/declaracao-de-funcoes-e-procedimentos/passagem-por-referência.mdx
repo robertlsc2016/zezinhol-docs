@@ -5,15 +5,15 @@ description: "Guia detalhado sobre a passagem de parâmetros por referência em 
 
 # Passagem de Parâmetros por Referência (`ref`)
 
-Na linguagem Zezinhol, ao passar dados para uma função ou procedimento, o comportamento padrão é a "passagem por valor" (onde apenas uma cópia do dado é enviada para o submódulo). No entanto, quando precisamos que o subprograma altere o valor da variável original que foi passada na chamada, utilizamos a **passagem por referência**, sinalizada pela palavra reservada `ref` [cite: 10].
+Na linguagem Zezinhol, ao passar dados para uma função ou procedimento, o comportamento padrão é a "passagem por valor" (onde apenas uma cópia do dado é enviada para o submódulo). No entanto, quando precisamos que o subprograma altere o valor da variável original que foi passada na chamada, utilizamos a **passagem por referência**, sinalizada pela palavra reservada `ref`.
 
 ---
 
 ## 1. O que é a Passagem por Referência?
 
-É possível alterar variáveis do escopo de origem (como o algoritmo principal ou um módulo chamador superior) adicionando a palavra reservada `ref` antes do parâmetro na declaração da função ou procedimento [cite: 10]. 
+É possível alterar variáveis do escopo de origem (como o algoritmo principal ou um módulo chamador superior) adicionando a palavra reservada `ref` antes do parâmetro na declaração da função ou procedimento. 
 
-Isso cria um **elo direto** com a variável original na memória [cite: 10]. Qualquer modificação, cálculo ou atribuição feita no parâmetro dentro da sub-rotina refletirá imediatamente e de forma permanente na variável externa correspondente.
+Isso cria um **elo direto** com a variável original na memória. Qualquer modificação, cálculo ou atribuição feita no parâmetro dentro da sub-rotina refletirá imediatamente e de forma permanente na variável externa correspondente.
 
 ---
 
@@ -26,7 +26,7 @@ procedimento nomeDoProcedimento(parametroPorValor : tipo; ref parametroPorRefere
 
 ```
 
-*Nota:* É possível agrupar múltiplas variáveis do mesmo tipo que compartilharão a passagem por referência: `ref var1, var2, var3 : tipo` [cite: 10].
+*Nota:* É possível agrupar múltiplas variáveis do mesmo tipo que compartilharão a passagem por referência: `ref var1, var2, var3 : tipo`.
 
 ---
 
@@ -36,7 +36,7 @@ Abaixo, exploramos cenários clássicos e avançados onde o uso do `ref` é indi
 
 ### Exemplo 1: Simulando Múltiplos Retornos
 
-Como as funções na linguagem Zezinhol retornam apenas um único valor através do comando `retorne`, podemos utilizar procedimentos com parâmetros `ref` para "devolver" múltiplos resultados calculados de uma só vez [cite: 10]. O uso de `ref` permite que as variáveis internas alterem os valores originais das variáveis que forem passadas na chamada do procedimento [cite: 10].
+Como as funções na linguagem Zezinhol retornam apenas um único valor através do comando `retorne`, podemos utilizar procedimentos com parâmetros `ref` para "devolver" múltiplos resultados calculados de uma só vez. O uso de `ref` permite que as variáveis internas alterem os valores originais das variáveis que forem passadas na chamada do procedimento.
 
 ```zezinhol
 algoritmo MultiplosResultados
@@ -98,7 +98,7 @@ fim algoritmo
 
 ### Exemplo 3: Passagem de Referência em Tipos Complexos (Listas/Ponteiros)
 
-Em estruturas de dados avançadas, como o controle de listas encadeadas, o `ref` é intensamente utilizado para atualizar os ponteiros de controle (cabeçalhos e caudas) das listas externas a partir de um procedimento, muitas vezes em cenários recursivos [cite: 10].
+Em estruturas de dados avançadas, como o controle de listas encadeadas, o `ref` é intensamente utilizado para atualizar os ponteiros de controle (cabeçalhos e caudas) das listas externas a partir de um procedimento, muitas vezes em cenários recursivos.
 
 ```zezinhol
 algoritmo ExemploPonteiros
@@ -113,7 +113,7 @@ var
   l1, l2, listaPar, listaImpar: PNo
 
   // 'lPar' e 'lImpar' recebem ref para que o procedimento consiga instanciar e
-  // atualizar as listas principais do algoritmo base [cite: 10].
+  // atualizar as listas principais do algoritmo base.
   procedimento separaParesEImpares(l1, l2 : PNo; ref lPar, lImpar : PNo)
   var
     ultPar, ultImpar : PNo
