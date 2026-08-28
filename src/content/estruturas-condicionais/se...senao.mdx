@@ -5,15 +5,15 @@ description: "Guia completo sobre a estrutura de controle de fluxo condicional c
 
 # Estrutura Condicional Composta (`se...senão`)
 
-Enquanto a condicional simples (`se`) permite executar um bloco de código apenas quando uma condição é verdadeira, a estrutura condicional composta `se...senão` é utilizada quando precisamos garantir um desvio de fluxo com duas vias alternativas [cite: 1]. 
+Enquanto a condicional simples (`se`) permite executar um bloco de código apenas quando uma condição é verdadeira, a estrutura condicional composta `se...senão` é utilizada quando precisamos garantir um desvio de fluxo com duas vias alternativas. 
 
-Em outras palavras, o algoritmo tomará uma decisão: se a condição for verdadeira, executará o primeiro bloco; se for falsa, executará obrigatoriamente o segundo bloco [cite: 1]. Nunca os dois blocos serão executados ao mesmo tempo, e o algoritmo nunca passará direto sem executar um deles.
+Em outras palavras, o algoritmo tomará uma decisão: se a condição for verdadeira, executará o primeiro bloco; se for falsa, executará obrigatoriamente o segundo bloco. Nunca os dois blocos serão executados ao mesmo tempo, e o algoritmo nunca passará direto sem executar um deles.
 
 ---
 
 ## 1. Regras e Sintaxe Geral
 
-A estrutura é iniciada com a palavra reservada `se`, seguida da condição lógica e de `então`. O bloco de comandos verdadeiro é escrito em seguida. Depois, insere-se a palavra reservada `senão`, seguida do bloco de comandos para o caso falso. Toda a estrutura, independentemente de quantos `senão` possua internamente, é encerrada com um único `fim se` referente àquele `se` aberto [cite: 1].
+A estrutura é iniciada com a palavra reservada `se`, seguida da condição lógica e de `então`. O bloco de comandos verdadeiro é escrito em seguida. Depois, insere-se a palavra reservada `senão`, seguida do bloco de comandos para o caso falso. Toda a estrutura, independentemente de quantos `senão` possua internamente, é encerrada com um único `fim se` referente àquele `se` aberto.
 
 ### Sintaxe:
 ```zezinhol
@@ -29,11 +29,11 @@ fim se
 
 ## 2. Condicionais Encadeadas (Aninhamento)
 
-O verdadeiro poder do `se...senão` aparece quando precisamos testar mais de duas possibilidades exclusivas (por exemplo, classificar algo como pequeno, médio ou grande). Para isso, podemos inserir uma nova estrutura `se...senão` inteira dentro do bloco `senão` da estrutura anterior [cite: 1].
+O verdadeiro poder do `se...senão` aparece quando precisamos testar mais de duas possibilidades exclusivas (por exemplo, classificar algo como pequeno, médio ou grande). Para isso, podemos inserir uma nova estrutura `se...senão` inteira dentro do bloco `senão` da estrutura anterior.
 
 Isso é chamado de **encadeamento** ou **aninhamento**.
 
-* **Regra de Ouro do Aninhamento:** Para cada `se` que você abrir no seu algoritmo, deverá existir um `fim se` correspondente para fechá-lo. Eles devem ser fechados na ordem inversa de abertura (de dentro para fora) [cite: 1].
+* **Regra de Ouro do Aninhamento:** Para cada `se` que você abrir no seu algoritmo, deverá existir um `fim se` correspondente para fechá-lo. Eles devem ser fechados na ordem inversa de abertura (de dentro para fora).
 
 ---
 

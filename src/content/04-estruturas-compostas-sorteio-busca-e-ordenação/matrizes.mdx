@@ -1,0 +1,145 @@
+---
+title: "Matrizes (Vetores de Vetores)"
+description: "Guia completo sobre matrizes multidimensionais e vetores encadeados na linguagem Zezinhol, com detalhes e exemplos práticos."
+---
+
+# Matrizes (Vetores de Vetores)
+
+Além das estruturas lineares simples, a linguagem permite estender os vetores para formar estruturas multidimensionais, conhecidas como **matrizes**. Elas são extremamente úteis quando precisamos organizar dados em formato de tabelas, grades ou mapas de coordenadas.
+
+Na linguagem Zezinhol, matrizes não existem como uma estrutura primitiva isolada. Toda matriz é modelada estritamente como um **vetor de vetores**.
+
+---
+
+## 1. Matrizes Bidimensionais
+
+Uma matriz bidimensional pode ser visualizada como uma tabela clássica composta por linhas e colunas organizadas geometricamente. 
+
+### 1.1 Representação Visual
+Veja a representação visual da indexação estrutural de uma matriz de 3 linhas e 4 colunas:
+
+| Coluna 1 | Coluna 2 | Coluna 3 | Coluna 4 |
+| :--- | :--- | :--- | :--- |
+| `[1,1]` | `[1,2]` | `[1,3]` | `[1,4]` |
+| `[2,1]` | `[2,2]` | `[2,3]` | `[2,4]` |
+| `[3,1]` | `[3,2]` | `[3,3]` | `[3,4]` |
+
+* No mapeamento acima, o **primeiro índice** localiza estritamente a linha da tabela, enquanto o **segundo** localiza a coluna.
+
+### 1.2 Sintaxe de Declaração
+Para declarar uma matriz bidimensional, declaramos um vetor onde o "tipo" de dado que ele guarda é, na verdade, outro vetor.
+
+```zezinhol
+var
+  nomeDaMatriz: vetor [indiceLinhaInicio..indiceLinhaFim] de vetor [indiceColunaInicio..indiceColunaFim] de tipoDoDado
+
+```
+
+---
+
+## 2. Dimensões Maiores e Extrapolação
+
+A grande vantagem dessa abordagem em cadeia é que, para criar estruturas ainda maiores e de outras dimensões (como cubos tridimensionais ou hipercubos), basta continuar encadeando definições sequencialmente utilizando a sintaxe de `vetor de vetor de vetor de...`.
+
+A indexação para leitura ou gravação de dados segue a mesma ordem encadeada de colchetes, utilizando um conjunto de colchetes para cada dimensão isolada (ex: `matriz[i][j][k]`).
+
+---
+
+## 3. Exemplos Práticos
+
+Abaixo, apresentamos três exemplos detalhados demonstrando a declaração, preenchimento e manipulação de matrizes bidimensionais e tridimensionais.
+
+### Exemplo 1: Preenchimento e Exibição de Tabela 3x3
+
+Este é o fluxo básico para ler e exibir uma matriz. É necessário utilizar dois laços `para` aninhados: o primeiro controla a linha atual, e o segundo preenche todas as colunas daquela linha.
+
+```zezinhol
+algoritmo preencheMatriz
+const
+  LINHAS = 3
+  COLUNAS = 3
+var
+  tabela: vetor [1..LINHAS] de vetor [1..COLUNAS] de inteiro
+  i, j: inteiro
+início
+  escreva("--- PREENCHENDO A MATRIZ ---")
+  
+  // 'i' representa o índice da linha
+  para i de 1 até LINHAS faça
+    // 'j' representa o índice da coluna
+    para j de 1 até COLUNAS faça
+      escreva("Digite o valor para a posicao [", i, "][", j, "]: ")
+      leia(tabela[i][j])
+    fim para
+  fim para
+  
+  escreva("--- EXIBINDO A MATRIZ ---")
+  
+  para i de 1 até LINHAS faça
+    para j de 1 até COLUNAS faça
+      escreva("Valor na linha ", i, ", coluna ", j, " é: ", tabela[i][j])
+    fim para
+  fim para
+fim algoritmo
+
+```
+
+### Exemplo 2: Processamento de Dados (Soma da Diagonal Principal)
+
+Em matrizes quadradas (mesmo número de linhas e colunas), a diagonal principal é formada pelos elementos onde o índice da linha é igual ao índice da coluna (`[1][1]`, `[2][2]`, `[3][3]`).
+
+```zezinhol
+algoritmo somaDiagonalPrincipal
+var
+  matrizQuadrada: vetor [1..4] de vetor [1..4] de real
+  i, j: inteiro
+  somaDiagonal: real
+início
+  somaDiagonal <- 0.0
+  
+  // Preenchimento fictício da matriz
+  para i de 1 até 4 faça
+    para j de 1 até 4 faça
+      // Sorteia um número aleatório para preencher a matriz mais rápido
+      matrizQuadrada[i][j] <- aleatorio()
+      
+      // Se a linha for igual a coluna, o elemento pertence à diagonal principal
+      se i = j então
+        somaDiagonal <- somaDiagonal + matrizQuadrada[i][j]
+      fim se
+    fim para
+  fim para
+  
+  escreva("A soma dos elementos da diagonal principal é: ", somaDiagonal)
+fim algoritmo
+
+```
+
+### Exemplo 3: Matriz Tridimensional (Cubo de Dados)
+
+Neste exemplo avançado, declaramos uma matriz de 3 dimensões, que exige três níveis de colchetes para ser acessada. O preenchimento exige o aninhamento de três laços `para`, varrendo cada dimensão respectiva.
+
+```zezinhol
+algoritmo ExemploMatrizTri
+var
+  // Declaração encadeando três níveis de vetores
+  m: vetor [1..10] de vetor [-5..5] de vetor [0..3] de real
+  i, j, k: inteiro
+início
+  // Laço da primeira dimensão (linhas/blocos)
+  para i de 1 até 10 faça
+  
+    // Laço da segunda dimensão (colunas)
+    para j de -5 até 5 faça
+    
+      // Laço da terceira dimensão (profundidade)
+      para k de 0 até 3 faça
+        // O acesso é feito encadeando os três índices
+        leia(m[i][j][k])
+      fim para
+      
+    fim para
+  fim para
+fim algoritmo
+
+```

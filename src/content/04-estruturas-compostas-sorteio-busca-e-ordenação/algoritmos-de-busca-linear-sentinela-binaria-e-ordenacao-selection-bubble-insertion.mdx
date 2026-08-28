@@ -11,10 +11,10 @@ A manipulação eficiente de dados em estruturas lineares exige o conhecimento d
 
 ## 1. Algoritmos de Busca
 
-A busca consiste em varrer uma estrutura linear à procura de um valor alvo conhecido como chave [cite: 2].
+A busca consiste em varrer uma estrutura linear à procura de um valor alvo conhecido como chave .
 
 ### 1.1 Busca Linear
-Percorre o vetor sequencialmente a partir do primeiro índice, checando os limites estruturais do tamanho e a igualdade da chave a cada iteração [cite: 2].
+Percorre o vetor sequencialmente a partir do primeiro índice, checando os limites estruturais do tamanho e a igualdade da chave a cada iteração .
 
 ```zezinhol
 i <- 1
@@ -30,7 +30,7 @@ fim se
 ```
 
 ### 1.2 Busca Linear com Sentinela
-Para otimizar o laço linear tradicional, expande-se o vetor adicionando uma posição fictícia logo após o tamanho preenchido ($N+1$) para clonar a chave buscada [cite: 2]. Isso elimina a necessidade de testar o limite de posições (`i <= N`) dentro do laço de repetição, economizando processamento [cite: 2].
+Para otimizar o laço linear tradicional, expande-se o vetor adicionando uma posição fictícia logo após o tamanho preenchido ($N+1$) para clonar a chave buscada . Isso elimina a necessidade de testar o limite de posições (`i <= N`) dentro do laço de repetição, economizando processamento .
 
 ```zezinhol
 leia(x)
@@ -49,9 +49,9 @@ fim se
 ```
 
 ### 1.3 Busca Binária
-A Busca Binária funciona dividindo consecutivamente a região de busca pela metade [cite: 2]. 
+A Busca Binária funciona dividindo consecutivamente a região de busca pela metade . 
 
-* **IMPORTANTE (pré-condição):** A busca binária somente funciona corretamente quando o vetor está **previamente ordenado** [cite: 2]. Se o vetor estiver desorganizado, a lógica de corte de limites falhará completamente e o elemento não será localizado [cite: 2].
+* **IMPORTANTE (pré-condição):** A busca binária somente funciona corretamente quando o vetor está **previamente ordenado** . Se o vetor estiver desorganizado, a lógica de corte de limites falhará completamente e o elemento não será localizado .
 
 ```zezinhol
 esq <- 1
@@ -79,7 +79,7 @@ fim enquanto
 A ordenação organiza os elementos de um vetor em uma ordem específica (crescente ou decrescente).
 
 ### 2.1 Selection Sort (Seleção Direta)
-Varre o vetor selecionando o menor elemento restante e colocando-o na posição ordenada atual [cite: 2].
+Varre o vetor selecionando o menor elemento restante e colocando-o na posição ordenada atual .
 
 ```zezinhol
 para i de 1 até N - 1 faça
@@ -96,7 +96,7 @@ fim para
 ```
 
 ### 2.2 Bubble Sort (Bolha)
-Compara elementos adjacentes empurrando os maiores para o topo, interrompendo as voltas quando nenhuma troca for detectada [cite: 2].
+Compara elementos adjacentes empurrando os maiores para o topo, interrompendo as voltas quando nenhuma troca for detectada .
 
 ```zezinhol
 trocou <- verdadeiro
@@ -114,7 +114,7 @@ fim enquanto
 ```
 
 ### 2.3 Insertion Sort (Inserção Direta)
-Insere cada elemento ordenadamente na sublista inicial já organizada [cite: 2].
+Insere cada elemento ordenadamente na sublista inicial já organizada .
 
 ```zezinhol
 para i de 2 até N faça

@@ -1,0 +1,149 @@
+"Vetores Unidimensionais"
+description: "Guia completo sobre estruturas de dados homogêneas e vetores unidimensionais na linguagem Zezinhol, com detalhes e exemplos práticos."
+---
+
+# Vetores Unidimensionais
+
+Até os momentos iniciais de aprendizado, trabalhamos com tipos simples, onde cada variável armazena um único valor por vez. No entanto, quando precisamos lidar com coleções de dados, utilizamos os **vetores** (ou arranjos), que são agregados de variáveis do mesmo tipo-base.
+
+Em vez de criar dezenas de variáveis avulsas (como `nota1`, `nota2`, `nota3`), um vetor permite agrupar todas elas sob um único nome, acessando cada "gaveta" através de um índice numérico sequencial.
+
+---
+
+## 1. Tipos de Dados Estruturados Homogêneos
+
+Os vetores representam coleções lineares de elementos do mesmo tipo. Isso significa que, se um vetor for declarado para armazenar números reais, todas as suas posições alocadas guardarão exclusivamente valores reais, sem misturar tipos.
+
+### 1.1 Sintaxe de Declaração
+A declaração de um vetor exige a definição do nome da variável, a palavra reservada `vetor`, o intervalo delimitador de índices entre colchetes (`[inicio..fim]`) e o tipo de dado que ele irá armazenar:
+
+```zezinhol
+var
+  nomeDoVetor: vetor [indiceInicial..indiceFinal] de tipoDoDado
+
+```
+
+### 1.2 Capacidade versus Tamanho
+
+Para a correta construção de algoritmos utilizando vetores, é vital discernir dois conceitos fundamentais aplicados a estruturas lineares:
+
+* **Capacidade:** Representa o limite máximo absoluto de posições alocadas na memória para o vetor. Ela é definida estritamente na seção de declaração (geralmente utilizando uma constante) e **não pode ser modificada** com o programa em execução.
+
+
+* **Tamanho:** Representa a quantidade real de posições que estão preenchidas com dados úteis e válidos em um determinado instante do algoritmo. O tamanho é dinâmico (varia de 0 até o limite da capacidade) e é monitorado por variáveis de controle (contadores) gerenciadas pelo programador.
+
+
+
+---
+
+## 2. Exemplos Práticos
+
+Abaixo, apresentamos três exemplos detalhados demonstrando a declaração, o preenchimento, a leitura e a manipulação de dados dentro de vetores unidimensionais.
+
+### Exemplo 1: Declaração, Preenchimento e Leitura Básica
+
+Este algoritmo demonstra o uso mais comum de vetores: utilizar um laço `para` para solicitar os dados ao usuário e, em seguida, usar outro laço para percorrer e exibir todos os valores que foram armazenados na estrutura.
+
+```zezinhol
+algoritmo preencheEExibeVetor
+const
+  CAPACIDADE = 5
+var
+  v: vetor [1..CAPACIDADE] de inteiro
+  i: inteiro
+início
+  escreva("--- PREENCHENDO O VETOR ---")
+  
+  // O laço percorre da posição 1 até a 5
+  para i de 1 até CAPACIDADE faça
+    escreva("Digite o valor para a posicao ", i, ": ")
+    leia(v[i])
+  fim para
+  
+  escreva("--- VALORES ARMAZENADOS ---")
+  
+  para i de 1 até CAPACIDADE faça
+    escreva("Posicao ", i, " contem o valor: ", v[i])
+  fim para
+fim algoritmo
+
+```
+
+### Exemplo 2: Controle de Tamanho Útil e Acumulação (Cálculo de Média)
+
+Neste exemplo, o vetor tem *capacidade* para 100 notas, mas o usuário decide quantas notas ele realmente quer inserir (o *tamanho* útil). O programa itera apenas sobre as posições preenchidas para somar os valores e calcular a média.
+
+```zezinhol
+algoritmo calculaMediaTurma
+const
+  MAX_ALUNOS = 100
+var
+  notas: vetor [1..MAX_ALUNOS] de real
+  i, tamanhoUtil: inteiro
+  soma, media: real
+início
+  escreva("Quantos alunos tem na turma? (Maximo 100): ")
+  leia(tamanhoUtil)
+  
+  se tamanhoUtil > MAX_ALUNOS então
+    escreva("Erro: O limite de capacidade e 100.")
+  senão
+    soma <- 0.0
+    
+    // Preenchendo apenas as posições úteis solicitadas
+    para i de 1 até tamanhoUtil faça
+      escreva("Digite a nota do aluno ", i, ": ")
+      leia(notas[i])
+      
+      // Acumula o valor recém-lido na variável soma
+      soma <- soma + notas[i]
+    fim para
+    
+    // Evita a divisão por zero
+    se tamanhoUtil > 0 então
+      media <- soma / tamanhoUtil
+      escreva("A media da turma foi: ", media)
+    fim se
+  fim se
+fim algoritmo
+
+```
+
+### Exemplo 3: Busca Linear em um Vetor
+
+Um dos algoritmos clássicos ao se trabalhar com estruturas de dados é a varredura para localizar uma informação. Aqui, buscamos um valor específico dentro do vetor e sinalizamos caso ele seja encontrado.
+
+```zezinhol
+algoritmo buscaValor
+var
+  numeros: vetor [1..5] de inteiro
+  i, valorBuscado: inteiro
+  encontrou: lógico
+início
+  // Preenchimento manual direto nas posições
+  numeros[1] <- 10
+  numeros[2] <- 25
+  numeros[3] <- 40
+  numeros[4] <- 7
+  numeros[5] <- 19
+  
+  escreva("Qual valor voce deseja buscar no vetor? ")
+  leia(valorBuscado)
+  
+  encontrou <- falso
+  
+  // Varredura linear: verifica posição por posição
+  para i de 1 até 5 faça
+    se numeros[i] = valorBuscado então
+      encontrou <- verdadeiro
+      escreva("Valor ", valorBuscado, " foi encontrado na posicao: ", i)
+    fim se
+  fim para
+  
+  // Se o laço terminar e a variável não tiver sido alterada para verdadeiro
+  se encontrou = falso então
+    escreva("O valor ", valorBuscado, " nao existe no vetor.")
+  fim se
+fim algoritmo
+
+```

@@ -5,7 +5,7 @@ description: "Guia completo sobre a estrutura de repetição finita com contador
 
 # Laço de repetição (`para`)
 
-A estrutura `para` é um laço de repetição projetado para situações onde a **quantidade de repetições é conhecida previamente** ou pode ser determinada com exatidão antes do laço começar [cite: 3].
+A estrutura `para` é um laço de repetição projetado para situações onde a **quantidade de repetições é conhecida previamente** ou pode ser determinada com exatidão antes do laço começar.
 
 Diferente do laço `enquanto` (que depende puramente de uma condição lógica que pode ser alterada a qualquer momento), o `para` é uma estrutura de contagem finita e automática.
 
@@ -26,8 +26,8 @@ fim para
 
 ## 2. Funcionamento Interno e Regras
 
-* **Variável de Controle:** Na linguagem Zezinhol, a estrutura `para` trabalha obrigatoriamente com uma variável de controle (geralmente uma variável do tipo `inteiro`, como `i` ou `cont`) [cite: 3].
-* **Incremento Automático e Fixo (+1):** Diferente de outras linguagens de programação, na linguagem Zezinhol **não é possível** definir passos customizados (como incrementar de 2 em 2, 3 em 3 ou fazer contagem regressiva). A variável de controle recebe o `valorInicial` na primeira iteração e é **incrementada estritamente de 1 em 1** a cada nova repetição [cite: 3]. Caso a lógica exija uma atualização diferente de um incremento unitário, deve-se obrigatoriamente utilizar a estrutura `enquanto` [cite: 3].
+* **Variável de Controle:** Na linguagem Zezinhol, a estrutura `para` trabalha obrigatoriamente com uma variável de controle (geralmente uma variável do tipo `inteiro`, como `i` ou `cont`).
+* **Incremento Automático e Fixo (+1):** Diferente de outras linguagens de programação, na linguagem Zezinhol **não é possível** definir passos customizados (como incrementar de 2 em 2, 3 em 3 ou fazer contagem regressiva). A variável de controle recebe o `valorInicial` na primeira iteração e é **incrementada estritamente de 1 em 1** a cada nova repetição. Caso a lógica exija uma atualização diferente de um incremento unitário, deve-se obrigatoriamente utilizar a estrutura `enquanto`.
 * **Regra de Início e Destino:** Devido ao passo ser obrigatoriamente crescente (+1), **o valor de início precisa ser menor (ou igual) ao valor de destino**. Se o número de início fornecido for maior que o número final (destino), o laço simplesmente não executará seu bloco de comandos nenhuma vez.
 * **Equivalência Lógica:** O laço `para` pode ser compreendido como uma forma abreviada de um `enquanto`. O bloco abaixo:
 
@@ -78,7 +78,7 @@ fim algoritmo
 
 ### Exemplo 2: Percorrendo uma String (Cadeia de Caracteres)
 
-Como as strings são sequências indexadas de caracteres, a estrutura `para` encaixa-se perfeitamente para percorrê-las posição por posição [cite: 3]. A função nativa `tamanho()` é frequentemente usada para definir o limite final do laço [cite: 3].
+Como as strings são sequências indexadas de caracteres, a estrutura `para` encaixa-se perfeitamente para percorrê-las posição por posição. A função nativa `tamanho()` é frequentemente usada para definir o limite final do laço.
 
 ```zezinhol
 algoritmo soletraPalavra
