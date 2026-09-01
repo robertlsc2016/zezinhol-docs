@@ -25,98 +25,22 @@ Utilizado para armazenar números com casas decimais (ponto flutuante) ou valore
 * **Exemplos válidos:** `3.14`, `-0.5`, `10.0`, `99.99`.
 * **Exemplo de uso:** Notas de alunos, salários, medidas de peso ou altura.
 
----
-
-## 2. Tipos Textuais
-
-Os tipos textuais são utilizados para armazenar letras, símbolos, espaços em branco e números que não serão utilizados em cálculos matemáticos (como um CPF ou número de telefone).
-
-### `caracter` (ou caractere)
-Utilizado para armazenar estritamente **um único** símbolo alfanumérico ou caractere especial da tabela ASCII. Na atribuição manual de valores, o dado deve ser envolvido por **aspas simples** (`' '`).
-* **Exemplos válidos:** `'A'`, `'z'`, `'7'`, `'#'`, `' '` (espaço).
-* **Exemplo de uso:** Respostas de menus de única letra (ex: 'S' ou 'N'), armazenamento do caractere isolado de uma string `s[i]`.
-
-### `string`
-Utilizado para armazenar uma sequência contínua (cadeia) de caracteres. Na linguagem Zezinhol, uma string funciona, na prática, como um vetor embutido de caracteres. Na atribuição manual de valores, o texto deve ser envolvido por **aspas duplas** (`" "`).
-* **Exemplos válidos:** `"Olá, Mundo!"`, `"Zezinhol 2026"`, `"A"`, `""` (string vazia).
-* **Exemplo de uso:** Nomes de usuários, frases, leitura de arquivos.
-
----
-
-## 3. Tipo Lógico
-
-### `lógico`
-Também conhecido como booleano em outras linguagens, o tipo lógico só consegue armazenar dois estados absolutos. Ele é o pilar das tomadas de decisão e estruturas condicionais do código.
-* **Valores válidos:** `verdadeiro` ou `falso`.
-* **Exemplo de uso:** Armazenar o resultado de uma verificação (`ehMaiorDeIdade <- idade >= 18`), sinalizadores (flags) para laços `enquanto`.
-
----
-
-## Exemplo Prático de Declaração Global
-
-Veja como todos esses tipos convivem na seção `var` de um algoritmo:
-
+**Exemplo Prático com Numéricos:**
 ```zezinhol
-algoritmo ExemploTiposPrimitivos
+algoritmo CalculoDeEstoque
 var
-  // Variáveis Numéricas
-  idadeUsuario, contador: inteiro
-  salarioMensal, altura, peso: real
-  
-  // Variáveis Textuais
-  nomeCompleto: string
-  sexoOuGenero: caracter
-  
-  // Variáveis Lógicas
-  temDesconto, ehMaiorDeIdade: lógico
+  quantidade: inteiro
+  precoUnitario, valorTotal: real
 início
-  // Atribuição básica
-  idadeUsuario <- 30
-  salarioMensal <- 2500.75
-  nomeCompleto <- "Maria da Silva"
-  sexoOuGenero <- 'F'
-  ehMaiorDeIdade <- verdadeiro
+  quantidade <- 15
+  precoUnitario <- 12.50
   
-  escreva("Cadastro realizado para ", nomeCompleto)
+  valorTotal <- quantidade * precoUnitario
+  escreva("O valor total em estoque é: R$ ", valorTotal)
 fim algoritmo
 
 ```
 
-"""
-
-with open("tipos_variaveis.txt", "w", encoding="utf-8") as f:
-f.write(tipos_content)
-
-```
-
-```markdown
----
-title: "Tipos de Dados Primitivos"
-description: "Guia completo sobre os tipos de variáveis nativas suportadas pela linguagem Zezinhol."
----
-
-# Tipos de Dados Primitivos
-
-Na linguagem Zezinhol, toda variável precisa ter o seu tipo de dado declarado previamente na seção `var`. O tipo define qual formato de informação aquela variável está autorizada a armazenar em memória. 
-
-Abaixo estão listados os tipos primitivos disponíveis na linguagem.
-
----
-
-## 1. Tipos Numéricos
-
-Os tipos numéricos são utilizados para armazenar valores destinados a cálculos matemáticos ou quantificações.
-
-### `inteiro`
-Utilizado para armazenar números inteiros (sem casas decimais), sejam eles positivos, negativos ou o zero.
-* **Exemplos válidos:** `0`, `42`, `-15`, `2024`.
-* **Exemplo de uso:** Contadores de laços (`para`, `enquanto`), idades, quantidades absolutas.
-
-### `real`
-Utilizado para armazenar números com casas decimais (ponto flutuante) ou valores fracionários. A separação decimal no código deve ser feita obrigatoriamente com **ponto** (`.`), e não vírgula.
-* **Exemplos válidos:** `3.14`, `-0.5`, `10.0`, `99.99`.
-* **Exemplo de uso:** Notas de alunos, salários, medidas de peso ou altura.
-
 ---
 
 ## 2. Tipos Textuais
@@ -124,29 +48,88 @@ Utilizado para armazenar números com casas decimais (ponto flutuante) ou valore
 Os tipos textuais são utilizados para armazenar letras, símbolos, espaços em branco e números que não serão utilizados em cálculos matemáticos (como um CPF ou número de telefone).
 
 ### `caracter` (ou caractere)
+
 Utilizado para armazenar estritamente **um único** símbolo alfanumérico ou caractere especial da tabela ASCII. Na atribuição manual de valores, o dado deve ser envolvido por **aspas simples** (`' '`).
+
 * **Exemplos válidos:** `'A'`, `'z'`, `'7'`, `'#'`, `' '` (espaço).
 * **Exemplo de uso:** Respostas de menus de única letra (ex: 'S' ou 'N'), armazenamento do caractere isolado de uma string `s[i]`.
 
 ### `string`
+
 Utilizado para armazenar uma sequência contínua (cadeia) de caracteres. Na linguagem Zezinhol, uma string funciona, na prática, como um vetor embutido de caracteres. Na atribuição manual de valores, o texto deve ser envolvido por **aspas duplas** (`" "`).
+
+* **Acesso por Índice:** Por se comportar como um vetor, é possível isolar, ler ou até modificar caracteres individuais utilizando colchetes `[]`. O primeiro caractere da cadeia sempre ocupa o índice 1.
+* *Exemplo:* Se `palavra <- "Gato"`, a instrução `escreva(palavra[1])` imprimirá a letra `'G'`.
+
+
+* **Funções de Manipulação:** A linguagem Zezinhol fornece a função nativa `tamanho()`, que recebe uma string e retorna um número inteiro representando a quantidade de caracteres contidos nela. Isso é frequentemente utilizado para delimitar laços de repetição que precisam varrer o texto letra por letra.
+* *Exemplo:* `para i de 1 até tamanho(palavra) faça ...`
+
+
 * **Exemplos válidos:** `"Olá, Mundo!"`, `"Zezinhol 2026"`, `"A"`, `""` (string vazia).
-* **Exemplo de uso:** Nomes de usuários, frases, leitura de arquivos.
+* **Exemplo de uso:** Nomes de usuários, frases, leitura de arquivos, varredura de textos letra por letra.
+
+**Exemplo Prático com Textos (Varredura de String):**
+
+```zezinhol
+algoritmo Soletrando
+var
+  palavra: string
+  i, totalLetras: inteiro
+início
+  escreva("Digite uma palavra: ")
+  leia(palavra)
+  
+  totalLetras <- tamanho(palavra)
+  escreva("A palavra tem ", totalLetras, " letras. Soletrando:")
+  
+  // Acessando a string letra por letra utilizando o índice [i]
+  para i de 1 até totalLetras faça
+    escreva("Letra ", i, ": ", palavra[i])
+  fim para
+fim algoritmo
+
+```
 
 ---
 
 ## 3. Tipo Lógico
 
 ### `lógico`
+
 Também conhecido como booleano em outras linguagens, o tipo lógico só consegue armazenar dois estados absolutos. Ele é o pilar das tomadas de decisão e estruturas condicionais do código.
+
 * **Valores válidos:** `verdadeiro` ou `falso`.
 * **Exemplo de uso:** Armazenar o resultado de uma verificação (`ehMaiorDeIdade <- idade >= 18`), sinalizadores (flags) para laços `enquanto`.
 
+**Exemplo Prático com Tipo Lógico (Flag e Decisão):**
+
+```zezinhol
+algoritmo VerificacaoDeAcesso
+var
+  idade: inteiro
+  acessoLiberado: lógico
+início
+  escreva("Digite sua idade: ")
+  leia(idade)
+  
+  // A variável lógica recebe o resultado de uma expressão relacional
+  acessoLiberado <- idade >= 18
+  
+  se acessoLiberado = verdadeiro então
+    escreva("Acesso permitido ao sistema!")
+  senão
+    escreva("Acesso negado. Apenas para maiores de 18 anos.")
+  fim se
+fim algoritmo
+
+```
+
 ---
 
-## Exemplo Prático de Declaração Global
+## Exemplo Prático de Declaração Global Integrada
 
-Veja como todos esses tipos convivem na seção `var` de um algoritmo:
+Veja como todos esses tipos convivem na seção `var` de um algoritmo e podem interagir:
 
 ```zezinhol
 algoritmo ExemploTiposPrimitivos
@@ -167,9 +150,14 @@ início
   salarioMensal <- 2500.75
   nomeCompleto <- "Maria da Silva"
   sexoOuGenero <- 'F'
+  
+  // Atribuição avaliativa
   ehMaiorDeIdade <- verdadeiro
   
+  // Exibição e manipulação de string por índice
   escreva("Cadastro realizado para ", nomeCompleto)
+  escreva("A primeira letra do nome é: ", nomeCompleto[1])
+  escreva("O nome possui ", tamanho(nomeCompleto), " caracteres.")
 fim algoritmo
 
 ```
