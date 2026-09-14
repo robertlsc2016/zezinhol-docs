@@ -1,0 +1,300 @@
+---
+title: "Coletânea de Exercícios - Subprogramas (Zezinhol)"
+description: "exercícios diversos para referência"
+---
+# Coletânea de Exercícios
+
+
+### Exercício 1
+* **Enunciado:** Faça o algoritmo de uma função que receba três valores reais e retorne o de maior valor.
+* **Autor:** Robert Luiz
+
+```zezinhol
+função retornarMaiorValor(num1, num2, num3 : real): real
+var
+    maior : real
+início
+    se (num1 > num2) E (num1 > num3) então
+        maior <- num1
+    senão
+        se (num2 > num3) então
+            maior <- num2
+        senão
+            maior <- num3
+        fim se
+    fim se
+
+    retorne maior
+fim função
+
+```
+
+---
+
+### Exercício 2
+
+* **Enunciado:** Faça o algoritmo de um procedimento que receba três valores inteiros e escreva todos os números compreendidos entre os valores dos dois primeiros parâmetros (inclusive), que sejam múltiplos do valor passado como terceiro parâmetro. Se o primeiro parâmetro for menor que o segundo a lista deve ser escrita em ordem crescente, e se for maior, em ordem decrescente.
+* **Autor:** Robert Luiz
+
+
+```zezinhol
+procedimento valoresMultiplosEntreDoisValores(num1, num2, num3: inteiro)
+var
+    i, j: inteiro
+início
+    se (num1 < num2) então
+        j <- num2
+        enquanto j >= num1 faça
+            se (j MOD num3 = 0) então
+                escreva(j)
+            fim se
+            j <- j - 1
+        fim enquanto
+    fim se
+
+    se (num1 > num2) então
+        para i de num2 até num1 faça
+            se (i MOD num3 = 0) então
+                escreva(i)
+            fim se
+        fim para
+    fim se
+
+    se (num1 = num2) então
+        se (num1 MOD num3 = 0) então
+            escreva(num1)
+        fim se
+    fim se
+
+fim procedimentos
+
+```
+
+---
+
+### Exercício 3
+
+* **Enunciado:** Faça o algoritmo de uma função lógica que receba três valores inteiros e retorne VERDADEIRO se eles podem ser os valores dos lados de um triângulo, ou FALSO em caso contrário.
+* **Autor:** Robert Luiz
+
+
+```zezinhol
+função trianguloValido(l1, l2, l3: inteiro): lógico
+var
+    v1, v2, v3 : lógico
+início
+    v1 <- l1 < l2 + l3
+    v2 <- l2 < l1 + l3
+    v3 <- l3 < l1 + l2
+
+    se (v1 E v2 E v3) então
+        retorne verdadeiro
+    senão
+        retorne falso
+    fim se
+fim função
+
+```
+
+---
+
+### Exercício 4
+
+* **Enunciado:** Faça o algoritmo de um procedimento que leia dois valores string que sejam garantidamente distintos, retornando estes dois valores, sendo que o primeiro parâmetro deve ser o menor e o segundo o maior.
+* **Autor:** Robert Luiz
+
+
+```zezinhol
+procedimento ordemStringsCrescente(ref s1, ref s2: string)
+var
+    aux : string
+início
+    leia(s1, s2)
+
+    enquanto( s1 = s2 ) faça
+        escreva("as strings sao iguais. tente novamente")
+        leia(s1, s2)
+    fim enquanto
+
+    se s1 > s2 então
+        aux <- s1
+        s1 <- s2
+        s2 <- aux
+    fim se
+fim procedimento
+
+```
+
+---
+
+### Exercício 5
+
+* **Enunciado:** Faça o algoritmo de um procedimento que receba um vetor de 100 números reais e retorne este vetor ordenado (usando qualquer dos métodos simples de ordenação). Defina, antes, um novo tipo de dado para este vetor.
+* **Autor:** Robert Luiz
+
+
+```zezinhol
+algoritmo ordernaVetorBubbleSort
+const 
+    MAX = 100
+tipos
+    TMeuVetor = vetor [1..MAX] de real
+
+var
+    meuVetor: TMeuVetor
+
+    procedimento preencheVetor(ref v: TMeuVetor)
+    var
+        i : inteiro
+    
+    início
+        para i de 1 até MAX faça
+            v[i] <- trunca( ( aleatorio() *  (100 - 1 + 1) ) + 1)
+        fim para
+    fim procedimento
+
+    procedimento ordernaVetor(ref v: TMeuVetor)
+    var
+        i, j : inteiro
+        aux : real
+    início
+        para i de 1 até MAX - 1 faça
+            para j de 1 até MAX - i faça
+                se (v[j] > v[j + 1]) então
+                    aux <- v[j]
+                    v[j] <- v[j+1]
+                    v[j+1] <- aux
+                fim se
+            fim para
+        fim para
+    fim procedimento
+
+
+início
+    preencheVetor(meuVetor)
+    ordernaVetor(meuVetor)
+fim algoritmo
+
+```
+
+---
+
+### Exercício 6
+
+* **Enunciado:** Faça o algoritmo de um procedimento que receba um valor inteiro representando uma quantidade de segundos e retorne o equivalente em horas, minutos e segundos.
+* **Autor:** Robert Luiz
+
+
+```zezinhol
+procedimento representarSegundosEmHoras(sgds: inteiro, ref out_h, ref out_m, ref out_s: inteiro)
+início
+    out_h <- sgds div 3600
+    out_m <- (sgds mod 3600) div 60
+    out_s <- sgds mod 60
+fim procedimento
+
+```
+
+---
+
+### Exercício 7
+
+* **Enunciado:** Faça o algoritmo de uma função inteira que receba uma string contendo um "número natural" e retorne este inteiro. Caso o valor não possa ser convertido, retorne -1.
+* **Autor:** Robert Luiz
+
+
+```zezinhol
+função stringNumberToNumber(n_str: string): inteiro
+var
+    acc, cod, i: inteiro
+início
+    acc <- 0
+    
+    para i de 1 até tamanho(n_str) faça
+        cod <- asc(n_str[i])
+
+        se (cod >= 48 e cod <= 57) então
+            acc <- (acc * 10) + (cod - 48)
+        senão
+            retorne -99999999
+        fim se
+    fim para
+    
+    retorne acc
+fim função
+
+```
+
+---
+
+### Exercício 12
+
+* **Enunciado:** Faça o algoritmo de uma função string que receba dois parâmetros: um caracter ce um número inteiro n, e retorne a string que tenha sequencialmente todos os n caracteres imprimíveis da tabela ASCII padrão a partir de c. Se houver menos que n caracteres nesta condição, não veja isto como problema e retorne a string com esse tamanho menor. Se n for negativo considere todos os n caracteres (anteriores) até c, ou seja, c será o último caracter da string.
+* **Autor:** Robert Luiz
+
+
+```zezinhol
+funcao alfascii(c: caracter, n: inteiro): string
+var
+    i: inteiro
+    str: string
+início
+    str <- c
+
+    se (n = 0) entao
+        retorne ""
+    fim se
+
+
+    se (n > 0) entao
+        para i de 1 até (n - 1) faça
+            se (asc(c) + i >= 32 E asc(c) + i <= 126) entao
+                str <- str + chr(asc(c) + i)
+            fim se
+        fim para
+        retorne str
+    fim se
+
+    se (n < 0) entao
+        para j de (asc(c) + n - 1) até asc(c) faça
+            se ( j >= 32 E j <= 126) entao
+                str <- str + chr(j)
+            fim se
+        fim para
+        retorne str
+    fim se
+fim funcao
+
+```
+
+---
+
+### Exercício 13
+
+* **Enunciado:** Faça o algoritmo de uma função inteira que receba um inteiro (de qualquer magnitude) e retorne a quantidade de bits 1 de sua representação binária.
+* **Autor:** Robert Luiz
+
+
+```zezinhol
+função bits1numero(num: inteiro): inteiro
+    var
+        bits1, j: inteiro
+início
+    se (num = 0) então
+        retorne 0
+    fim se
+
+    j <- num
+    bits1 <- 0
+
+    enquanto (j > 0) faça
+        se ( j MOD 2 = 1) então
+            bits1 <- bits1 + 1
+        fim se
+        j <- j DIV 2
+    fim enquanto
+
+    retorne bits1
+fim função
+
+```
