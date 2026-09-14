@@ -1,9 +1,9 @@
-
 ---
 title: "Coletânea de Exercícios - Subprogramas (Zezinhol)"
 description: "exercícios diversos para referência"
 ---
 # Coletânea de Exercícios
+
 
 ### Exercício 1
 * **Enunciado:** Faça o algoritmo de uma função que receba três valores reais e retorne o de maior valor.
@@ -26,10 +26,16 @@ início
 
     retorne maior
 fim função
+```
 
-Exercício 2
- * Enunciado: Faça o algoritmo de um procedimento que receba três valores inteiros e escreva todos os números compreendidos entre os valores dos dois primeiros parâmetros (inclusive), que sejam múltiplos do valor passado como terceiro parâmetro. Se o primeiro parâmetro for menor que o segundo a lista deve ser escrita em ordem crescente, e se for maior, em ordem decrescente.
- * Autor: Robert Luiz
+---
+
+### Exercício 2
+
+* **Enunciado:** Faça o algoritmo de um procedimento que receba três valores inteiros e escreva todos os números compreendidos entre os valores dos dois primeiros parâmetros (inclusive), que sejam múltiplos do valor passado como terceiro parâmetro. Se o primeiro parâmetro for menor que o segundo a lista deve ser escrita em ordem crescente, e se for maior, em ordem decrescente.
+* **Autor:** Robert Luiz
+
+```zezinhol
 procedimento valoresMultiplosEntreDoisValores(num1, num2, num3: inteiro)
 var
     i, j: inteiro
@@ -59,10 +65,16 @@ início
     fim se
 
 fim procedimentos
+```
 
-Exercício 3
- * Enunciado: Faça o algoritmo de uma função lógica que receba três valores inteiros e retorne VERDADEIRO se eles podem ser os valores dos lados de um triângulo, ou FALSO em caso contrário.
- * Autor: Robert Luiz
+---
+
+### Exercício 3
+
+* **Enunciado:** Faça o algoritmo de uma função lógica que receba três valores inteiros e retorne VERDADEIRO se eles podem ser os valores dos lados de um triângulo, ou FALSO em caso contrário.
+* **Autor:** Robert Luiz
+
+```zezinhol
 função trianguloValido(l1, l2, l3: inteiro): lógico
 var
     v1, v2, v3 : lógico
@@ -77,10 +89,16 @@ início
         retorne falso
     fim se
 fim função
+```
 
-Exercício 4
- * Enunciado: Faça o algoritmo de um procedimento que leia dois valores string que sejam garantidamente distintos, retornando estes dois valores, sendo que o primeiro parâmetro deve ser o menor e o segundo o maior.
- * Autor: Robert Luiz
+---
+
+### Exercício 4
+
+* **Enunciado:** Faça o algoritmo de um procedimento que leia dois valores string que sejam garantidamente distintos, retornando estes dois valores, sendo que o primeiro parâmetro deve ser o menor e o segundo o maior.
+* **Autor:** Robert Luiz
+
+```zezinhol
 procedimento ordemStringsCrescente(ref s1, ref s2: string)
 var
     aux : string
@@ -98,10 +116,16 @@ início
         s2 <- aux
     fim se
 fim procedimento
+```
 
-Exercício 5
- * Enunciado: Faça o algoritmo de um procedimento que receba um vetor de 100 números reais e retorne este vetor ordenado (usando qualquer dos métodos simples de ordenação). Defina, antes, um novo tipo de dado para este vetor.
- * Autor: Robert Luiz
+---
+
+### Exercício 5
+
+* **Enunciado:** Faça o algoritmo de um procedimento que receba um vetor de 100 números reais e retorne este vetor ordenado (usando qualquer dos métodos simples de ordenação). Defina, antes, um novo tipo de dado para este vetor.
+* **Autor:** Robert Luiz
+
+```zezinhol
 algoritmo ordernaVetorBubbleSort
 const 
     MAX = 100
@@ -114,7 +138,7 @@ var
     procedimento preencheVetor(ref v: TMeuVetor)
     var
         i : inteiro
-    
+
     início
         para i de 1 até MAX faça
             v[i] <- trunca( ( aleatorio() *  (100 - 1 + 1) ) + 1)
@@ -137,31 +161,42 @@ var
         fim para
     fim procedimento
 
-
 início
     preencheVetor(meuVetor)
     ordernaVetor(meuVetor)
 fim algoritmo
+```
 
-Exercício 6
- * Enunciado: Faça o algoritmo de um procedimento que receba um valor inteiro representando uma quantidade de segundos e retorne o equivalente em horas, minutos e segundos.
- * Autor: Robert Luiz
+---
+
+### Exercício 6
+
+* **Enunciado:** Faça o algoritmo de um procedimento que receba um valor inteiro representando uma quantidade de segundos e retorne o equivalente em horas, minutos e segundos.
+* **Autor:** Robert Luiz
+
+```zezinhol
 procedimento representarSegundosEmHoras(sgds: inteiro, ref out_h, ref out_m, ref out_s: inteiro)
 início
     out_h <- sgds div 3600
     out_m <- (sgds mod 3600) div 60
     out_s <- sgds mod 60
 fim procedimento
+```
 
-Exercício 7
- * Enunciado: Faça o algoritmo de uma função inteira que receba uma string contendo um "número natural" e retorne este inteiro. Caso o valor não possa ser convertido, retorne -1.
- * Autor: Robert Luiz
+---
+
+### Exercício 7
+
+* **Enunciado:** Faça o algoritmo de uma função inteira que receba uma string contendo um "número natural" e retorne este inteiro. Caso o valor não possa ser convertido, retorne -1.
+* **Autor:** Robert Luiz
+
+```zezinhol
 função stringNumberToNumber(n_str: string): inteiro
 var
     acc, cod, i: inteiro
 início
     acc <- 0
-    
+
     para i de 1 até tamanho(n_str) faça
         cod <- asc(n_str[i])
 
@@ -171,17 +206,23 @@ início
             retorne -99999999
         fim se
     fim para
-    
+
     retorne acc
 fim função
+```
 
-Exercício 8
- * Enunciado: Faça o algoritmo de uma função string que receba um número inteiro representando um número inteiro na base decimal e retorne a string com o equivalente valor escrito na base binária.
- * Autor: Robert Luiz
+---
+
+### Exercício 8
+
+* **Enunciado:** Faça o algoritmo de uma função que receba um número inteiro e retorne uma string contendo sua representação em binário.
+* **Autor:** Robert Luiz
+
+```zezinhol
 função NSTRTO(n: inteiro): string
-    var
-        j, numerador: inteiro
-        s_acc, aux_s_acc : string
+var
+    j, numerador: inteiro
+    s_acc, aux_s_acc : string
 início
     se n = 0 então
         retorne "0"
@@ -194,43 +235,56 @@ início
     enquanto (numerador DIV 2 <> 0) faça
         se (numerador MOD 2 = 1) então
             aux_s_acc <- aux_s_acc + "1"
-        se não
+        senão
             aux_s_acc <- aux_s_acc + "0"
         fim se
         numerador <- numerador DIV 2
     fim enquanto    
-    
+
     aux_s_acc <- aux_s_acc + "1"
-    
+
     j <- tamanho(aux_s_acc)
 
     enquanto j >= 1 faça
-        s_acc <- s_acc +aux_s_acc[j]
-        j <- j -1
+        s_acc <- s_acc + aux_s_acc[j]
+        j <- j - 1
     fim enquanto
+
     retorne s_acc
 fim função
+```
 
-Exercício 9
- * Enunciado: Faça o algoritmo de uma função lógica que receba uma string e retorne VERDADEIRO se ela é palíndrome, ou FALSO em caso contrário.
- * Autor: Robert Luiz
+---
+
+### Exercício 9
+
+* **Enunciado:** Faça o algoritmo de uma função lógica que receba uma string e retorne VERDADEIRO se ela for um palíndromo, ou FALSO caso contrário.
+* **Autor:** Robert Luiz
+
+```zezinhol
 função ÉPALINDROME(str: string): lógico
 var
     i : inteiro
 início
-    
+
     para i de 1 até (tamanho(str) DIV 2) faça
-        se ( str[i] <> str[tamanho(str) + 1 - i]  ) então
+        se (str[i] <> str[tamanho(str) + 1 - i]) então
             retorne falso
         fim se
     fim para
 
     retorne verdadeiro
 fim função
+```
 
-Exercício 10
- * Enunciado: Faça o algoritmo de um função lógica que receba os três valores dos coeficientes de uma equação do segundo grau e retorne as suas duas raízes reais (independente se forem ou não iguais), retornando VERDADEIRO se existem raízes reais, ou FALSO em caso contrário.
- * Autor: Robert Luiz
+---
+
+### Exercício 10
+
+* **Enunciado:** Faça o algoritmo de uma função lógica que receba os três valores dos coeficientes de uma equação do segundo grau e retorne as suas duas raízes reais (independente se forem ou não iguais), retornando VERDADEIRO se existem raízes reais, ou FALSO em caso contrário.
+* **Autor:** Robert Luiz
+
+```zezinhol
 função eq2grau(A, B, C : real; ref R1, R2 : real): lógico
 var
     delta : real
@@ -239,21 +293,27 @@ início
         retorne falso
     fim se
 
-    delta <-  (B * B) - (4 * A * C)
+    delta <- (B * B) - (4 * A * C)
 
-    se ( delta < 0 ) então
+    se (delta < 0) então
         retorne falso
     fim se
 
-    R1 <- ( (B * -1) + raizq(delta) ) / (2 * A)
-    R2 <- ( (B * -1) - raizq(delta) ) / (2 * A)
-    
+    R1 <- ((B * -1) + raizq(delta)) / (2 * A)
+    R2 <- ((B * -1) - raizq(delta)) / (2 * A)
+
     retorne verdadeiro
 fim função
+```
 
-Exercício 11
- * Enunciado: Faça o algoritmo de um procedimento que seja uma versão alternativa e mais específica do comando leia(), que receba 3 parâmetros: uma variável inteira a ser lida, um valor mínimo e um valor máximo, e retorne um valor lido que esteja garantidamente entre o valor mínimo e máximo passados, ou seja, leia o valor até que ele esteja dentro dos limites permitidos.
- * Autor: Robert Luiz
+---
+
+### Exercício 11
+
+* **Enunciado:** Faça o algoritmo de um procedimento que leia um número inteiro dentro de um intervalo definido por dois valores reais. Caso os limites sejam fornecidos em ordem inversa, o procedimento deve corrigi-los antes de realizar a leitura. O procedimento deve continuar solicitando o número até que ele esteja dentro do intervalo.
+* **Autor:** Robert Luiz
+
+```zezinhol
 PROCEDIMENTO leiaIntervalo(REF n: INTEIRO; min, max: REAL)
 VAR
     aux: REAL
@@ -273,10 +333,16 @@ INÍCIO
     FIM ENQUANTO
 
 FIM PROCEDIMENTO
+```
 
-Exercício 12
- * Enunciado: Faça o algoritmo de uma função string que receba dois parâmetros: um caracter ce um número inteiro n, e retorne a string que tenha sequencialmente todos os n caracteres imprimíveis da tabela ASCII padrão a partir de c. Se houver menos que n caracteres nesta condição, não veja isto como problema e retorne a string com esse tamanho menor. Se n for negativo considere todos os n caracteres (anteriores) até c, ou seja, c será o último caracter da string.
- * Autor: Robert Luiz
+---
+
+### Exercício 12
+
+* **Enunciado:** Faça o algoritmo de uma função string que receba dois parâmetros: um caracter ce um número inteiro n, e retorne a string que tenha sequencialmente todos os n caracteres imprimíveis da tabela ASCII padrão a partir de c. Se houver menos que n caracteres nesta condição, não veja isto como problema e retorne a string com esse tamanho menor. Se n for negativo considere todos os n caracteres (anteriores) até c, ou seja, c será o último caracter da string.
+* **Autor:** Robert Luiz
+
+```zezinhol
 funcao alfascii(c: caracter, n: inteiro): string
 var
     i: inteiro
@@ -287,7 +353,6 @@ início
     se (n = 0) entao
         retorne ""
     fim se
-
 
     se (n > 0) entao
         para i de 1 até (n - 1) faça
@@ -300,20 +365,26 @@ início
 
     se (n < 0) entao
         para j de (asc(c) + n - 1) até asc(c) faça
-            se ( j >= 32 E j <= 126) entao
+            se (j >= 32 E j <= 126) entao
                 str <- str + chr(j)
             fim se
         fim para
         retorne str
     fim se
 fim funcao
+```
 
-Exercício 13
- * Enunciado: Faça o algoritmo de uma função inteira que receba um inteiro (de qualquer magnitude) e retorne a quantidade de bits 1 de sua representação binária.
- * Autor: Robert Luiz
+---
+
+### Exercício 13
+
+* **Enunciado:** Faça o algoritmo de uma função inteira que receba um inteiro (de qualquer magnitude) e retorne a quantidade de bits 1 de sua representação binária.
+* **Autor:** Robert Luiz
+
+```zezinhol
 função bits1numero(num: inteiro): inteiro
-    var
-        bits1, j: inteiro
+var
+    bits1, j: inteiro
 início
     se (num = 0) então
         retorne 0
@@ -323,7 +394,7 @@ início
     bits1 <- 0
 
     enquanto (j > 0) faça
-        se ( j MOD 2 = 1) então
+        se (j MOD 2 = 1) então
             bits1 <- bits1 + 1
         fim se
         j <- j DIV 2
@@ -331,5 +402,4 @@ início
 
     retorne bits1
 fim função
-
-
+```
