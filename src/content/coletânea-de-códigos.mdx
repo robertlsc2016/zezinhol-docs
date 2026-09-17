@@ -313,9 +313,9 @@ fim algoritmo
 ```zezinhol
 procedimento representarSegundosEmHoras(sgds: inteiro, ref out_h, ref out_m, ref out_s: inteiro)
 início
-    out_h <- sgds div 3600
-    out_m <- (sgds mod 3600) div 60
-    out_s <- sgds mod 60
+    out_h <- sgds DIV 3600
+    out_m <- (sgds MOD 3600) DIV 60
+    out_s <- sgds MOD 60
 fim procedimento
 ```
 
@@ -323,7 +323,12 @@ fim procedimento
 <summary>Resolução IA</summary>
 
 ```zezinhol
-
+procedimento converterTempo(segundos_totais: inteiro, ref horas, ref minutos, ref segundos: inteiro)
+início
+    horas <- segundos_totais DIV 3600
+    minutos <- (segundos_totais MOD 3600) DIV 60
+    segundos <- segundos_totais MOD 60
+fim procedimento
 ```
 
 </details>
@@ -347,7 +352,7 @@ início
         se (cod >= 48 e cod <= 57) então
             acc <- (acc * 10) + (cod - 48)
         senão
-            retorne -99999999
+            retorne -1
         fim se
     fim para
 
@@ -358,7 +363,26 @@ fim função
 <summary>Resolução IA</summary>
 
 ```zezinhol
+função stringParaNatural(s: string): inteiro
+var
+    acc, cod, i: inteiro
+início
+    se tamanho(s) = 0 então
+        retorne -1
+    fim se
 
+    acc <- 0
+    
+    para i de 1 até tamanho(s) faça
+        cod <- asc(s[i])
+        se (cod >= 48 e cod <= 57) então
+            acc <- (acc * 10) + (cod - 48)
+        senão
+            retorne -1
+        fim se
+    fim para
+    retorne acc
+fim função
 ```
 
 </details>
@@ -408,7 +432,30 @@ fim função
 <summary>Resolução IA</summary>
 
 ```zezinhol
+função inteiroParaBinario(n: inteiro): string
+var
+    numerador: inteiro
+    str_final: string
+início
+    se n = 0 então
+        retorne "0"
+    fim se
 
+    numerador <- n
+    str_final <- ""
+
+    enquanto numerador > 0 faça
+        se (numerador mod 2 = 1) então
+            str_final <- "1" + str_final
+        senão
+            str_final <- "0" + str_final
+        fim se
+        
+        numerador <- numerador div 2
+    fim enquanto
+
+    retorne str_final
+fim função
 ```
 
 </details>
@@ -439,10 +486,31 @@ fim função
 <summary>Resolução IA</summary>
 
 ```zezinhol
+função verificaPalindromo(s: string): lógico
+var
+    esq, dir: inteiro
+início
+    se tamanho(s) <= 1 então
+        retorne verdadeiro
+    fim se
 
+    esq <- 1
+    dir <- tamanho(s)
+
+    enquanto esq < dir faça
+        se s[esq] != s[dir] então
+            retorne falso
+        fim se
+        
+        esq <- esq + 1
+        dir <- dir - 1
+    fim enquanto
+
+    retorne verdadeiro
+fim função
 ```
-
 </details>
+
 ---
 
 ### Exercício 10
@@ -476,7 +544,25 @@ fim função
 <summary>Resolução IA</summary>
 
 ```zezinhol
+função eq2grau(A, B, C: real, ref R1, ref R2: real): lógico
+var
+    delta : real
+início
+    se A = 0 então
+        retorne falso
+    fim se
 
+    delta <- (B * B) - (4 * A * C)
+
+    se delta < 0 então
+        retorne falso
+    fim se
+
+    R1 <- ( (B * -1) + raizq(delta) ) / (2 * A)
+    R2 <- ( (B * -1) - raizq(delta) ) / (2 * A)
+    
+    retorne verdadeiro
+fim função
 ```
 
 </details>
@@ -513,7 +599,23 @@ FIM PROCEDIMENTO
 <summary>Resolução IA</summary>
 
 ```zezinhol
+procedimento lerNoIntervalo(ref n: inteiro, min: real, max: real)
+var
+    aux: real
+início
+    se min > max então
+        aux <- min
+        min <- max
+        max <- aux
+    fim se
 
+    leia(n)
+
+    enquanto n < min ou n > max faça
+        escreva("O valor fornecido não se encontra no intervalo. Tente novamente:")
+        leia(n)
+    fim enquanto
+fim procedimento
 ```
 
 </details>
@@ -560,7 +662,43 @@ fim funcao
 <summary>Resolução IA</summary>
 
 ```zezinhol
+função alfascii(c: caracter, n: inteiro): string
+var
+    i, codigo, limite: inteiro
+    str: string
+início
+    str <- ""
 
+    // 1º Cenário: n é positivo (captura de 'c' para a frente)
+    se n > 0 então
+        para i de 1 até n faça
+            codigo <- asc(c) + i - 1
+            
+            // Filtra exclusivamente os caracteres imprimíveis da tabela ASCII
+            se codigo >= 32 e codigo <= 126 então
+                str <- str + chr(codigo)
+            fim se
+        fim para
+    fim se
+
+    // 2º Cenário: n é negativo (captura de trás para a frente, terminando em 'c')
+    se n < 0 então
+        // Inverte o sinal de n para o laço 'para' conseguir rodar positivamente
+        limite <- n * -1
+        
+        para i de 1 até limite faça
+            // A matemática aqui recua as posições e vem somando até chegar no próprio 'c'
+            codigo <- asc(c) + n + i
+            
+            se codigo >= 32 e codigo <= 126 então
+                str <- str + chr(codigo)
+            fim se
+        fim para
+    fim se
+
+    // Se n for exatamente 0, os blocos são ignorados e a string retorna vazia
+    retorne str
+fim função
 ```
 
 </details>
@@ -597,7 +735,23 @@ fim função
 <summary>Resolução IA</summary>
 
 ```zezinhol
+função contarBitsUm(n: inteiro): inteiro
+var
+    qtd, temp: inteiro
+início
+    qtd <- 0
+    temp <- n
 
+    enquanto temp != 0 faça
+        se (temp bitE 1) = 1 então
+            qtd <- qtd + 1
+        fim se
+        
+        temp <- temp shr 1
+    fim enquanto
+    
+    retorne qtd
+fim função
 ```
 
 </details>
