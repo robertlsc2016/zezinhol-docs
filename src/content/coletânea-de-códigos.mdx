@@ -498,7 +498,7 @@ início
     dir <- tamanho(s)
 
     enquanto esq < dir faça
-        se s[esq] != s[dir] então
+        se s[esq] <> s[dir] então
             retorne falso
         fim se
         
@@ -742,7 +742,7 @@ início
     qtd <- 0
     temp <- n
 
-    enquanto temp != 0 faça
+    enquanto temp <> 0 faça
         se (temp bitE 1) = 1 então
             qtd <- qtd + 1
         fim se
